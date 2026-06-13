@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Email new meeting-report PDFs as attachments.
 
-Usage: send_email.py --to addr@example.com report1.pdf [report2.pdf ...]
+Usage: send_email.py [--from a@x.com] [--to b@y.com] report1.pdf [report2.pdf ...]
 
 SMTP settings come from the environment (set them in
 ~/vancouver_scraper/.env, sourced by nightly.sh):
@@ -9,12 +9,13 @@ SMTP settings come from the environment (set them in
     SMTP_PORT      465 (SSL) or 587/2525 (STARTTLS)
     SMTP_USERNAME  SMTP login (Mailtrap: the inbox user, or "api" for sending)
     SMTP_PASSWORD  SMTP password / API token
-    SMTP_FROM      the From: address — REQUIRED with Mailtrap, since the SMTP
-                   username there is not an email address. Falls back to
-                   SMTP_USERNAME only when that looks like an address.
+    SMTP_FROM      the From: address (required to send; --from overrides)
+    SMTP_TO        the recipient address (required to send; --to overrides)
 
-If SMTP_SERVER is unset the script logs and exits 0 — email is optional, so a
-missing config never fails the nightly run.
+From and To are independent — different addresses and domains are fine, and
+neither is tied to the SMTP login (Mailtrap's username is not an email
+address). If SMTP_SERVER is unset the script logs and exits 0 — email is
+optional, so a missing config never fails the nightly run.
 """
 
 import argparse
@@ -28,7 +29,10 @@ from pathlib import Path
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--to", required=True, help="recipient address")
+    parser.add_argument("--to", default=None,
+                        help="recipient address (default: $SMTP_TO)")
+    parser.add_argument("--from", dest="from_addr", default=None,
+                        help="sender address (default: $SMTP_FROM)")
     parser.add_argument("--subject", default=None, help="override subject")
     parser.add_argument("--dry-run", action="store_true",
                         help="build the message and report it, but don't connect/send")
@@ -39,15 +43,11 @@ def main() -> int:
     port = int(os.environ.get("SMTP_PORT", "587"))
     username = os.environ.get("SMTP_USERNAME", "")
     password = os.environ.get("SMTP_PASSWORD", "")
-    # The From: address is separate from the SMTP login. Providers like
-    # Mailtrap use a non-email username (an inbox hash, or the literal "api"),
-    # so SMTP_FROM must carry a real address; only reuse the username as From
-    # when it already looks like one.
-    from_addr = os.environ.get("SMTP_FROM") or (
-        username if "@" in username else ""
-    )
-    if not from_addr:
-        print("warning: no valid From address (set SMTP_FROM)", file=sys.stderr)
+    # From and To are independent and may be different addresses/domains. The
+    # From: is separate from the SMTP login too — Mailtrap's username is a hash
+    # (sandbox) or the literal "api" (live), never an email address.
+    from_addr = args.from_addr or os.environ.get("SMTP_FROM", "")
+    to_addr = args.to or os.environ.get("SMTP_TO", "")
 
     pdfs = [p for p in args.pdfs if p.is_file()]
     if not pdfs:
@@ -56,8 +56,8 @@ def main() -> int:
 
     names = ", ".join(p.name for p in pdfs)
     msg = EmailMessage()
-    msg["From"] = from_addr or args.to
-    msg["To"] = args.to
+    msg["From"] = from_addr
+    msg["To"] = to_addr
     msg["Subject"] = args.subject or f"New Vancouver meeting reports: {names}"
     msg.set_content(
         "New meeting report PDFs are attached:\n\n"
@@ -72,8 +72,8 @@ def main() -> int:
     if args.dry_run:
         print(f"[dry-run] would send via {server or '(SMTP_SERVER unset)'}:{port}"
               f" as {username or '(SMTP_USERNAME unset)'}")
-        print(f"[dry-run] From: {msg['From']}")
-        print(f"[dry-run] To: {args.to}")
+        print(f"[dry-run] From: {from_addr or '(set SMTP_FROM)'}")
+        print(f"[dry-run] To:   {to_addr or '(set SMTP_TO or --to)'}")
         print(f"[dry-run] Subject: {msg['Subject']}")
         for p in pdfs:
             print(f"[dry-run] attach: {p.name} ({p.stat().st_size:,} bytes)")
@@ -82,6 +82,12 @@ def main() -> int:
     if not server:
         print("SMTP_SERVER unset; skipping email", file=sys.stderr)
         return 0
+    if not from_addr:
+        print("SMTP_FROM (sender) is required; skipping email", file=sys.stderr)
+        return 1
+    if not to_addr:
+        print("SMTP_TO (recipient) is required; skipping email", file=sys.stderr)
+        return 1
 
     try:
         if port == 465:

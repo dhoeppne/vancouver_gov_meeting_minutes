@@ -142,15 +142,18 @@ export SMTP_SERVER=sandbox.smtp.mailtrap.io
 export SMTP_PORT=587                                  # 587/2525 STARTTLS, or 465 SSL
 export SMTP_USERNAME=your_mailtrap_inbox_user         # a hash, NOT an email
 export SMTP_PASSWORD=your_mailtrap_inbox_pass
-export SMTP_FROM=reports@davidhoeppner.ca             # real From: (required — username isn't an address)
+# From and To are independent — different addresses/domains are fine:
+export SMTP_FROM=reports@sender-domain.com            # the From: address
+export SMTP_TO=you@your-domain.com                    # the recipient
 EOF
 ```
 
-For Mailtrap **live sending** (delivers to a real inbox) instead of sandbox,
-use `SMTP_SERVER=live.smtp.mailtrap.io`, `SMTP_USERNAME=api`,
-`SMTP_PASSWORD=<your API token>`, and an `SMTP_FROM` on a verified sending
-domain. Either way `SMTP_FROM` is required, because Mailtrap's SMTP username is
-not an email address.
+`SMTP_FROM` and `SMTP_TO` are both required to send and may be on entirely
+different domains; neither is tied to `SMTP_USERNAME` (Mailtrap's username is
+not an email address). For Mailtrap **live sending** (delivers to a real inbox)
+instead of sandbox, use `SMTP_SERVER=live.smtp.mailtrap.io`,
+`SMTP_USERNAME=api`, `SMTP_PASSWORD=<your API token>`, and an `SMTP_FROM` on a
+verified sending domain.
 
 A few nightly headless sessions sit comfortably within Pro/Max limits.
 
@@ -246,19 +249,19 @@ Public Delegations · What to Watch Next.
 
 All commands below assume `cd ~/vancouver_scraper/repo && source ~/vancouver_scraper/.env`.
 
-**Test email** without sending (checks config + From + which PDFs would attach):
+**Test email** without sending (checks config — From/To/attachments — and sends
+nothing). From/To come from `$SMTP_FROM` / `$SMTP_TO`:
 
 ```bash
-.venv/bin/python scripts/send_email.py --to "$SMTP_FROM" --dry-run \
+.venv/bin/python scripts/send_email.py --dry-run \
   "$VANCOUVER_DATA_DIR"/vancouver_city_council/reports/*.pdf
 ```
 
 Then send a real one (any PDF works). With Mailtrap **sandbox** the message is
-captured in your Mailtrap inbox (the `--to` can be anything); with **live**
-sending it arrives at the real address:
+captured in your Mailtrap inbox; with **live** sending it arrives at `$SMTP_TO`:
 
 ```bash
-.venv/bin/python scripts/send_email.py --to "$SMTP_FROM" \
+.venv/bin/python scripts/send_email.py \
   "$(find "$VANCOUVER_DATA_DIR" -path '*/reports/*.pdf' | head -1)"
 # prints "emailed 1 report(s) to ..." on success → check the Mailtrap inbox (or your inbox)
 ```

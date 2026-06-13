@@ -16,8 +16,8 @@
 #   - repo-local .venv (auto-created below) with requirements.txt installed
 #   - optional SMTP_* vars (in ~/vancouver_scraper/.env) to enable email
 #
-# Env overrides: VANCOUVER_DATA_DIR, CLAUDE_BIN, REPORT_LOG_DIR, REPORT_TIMEOUT,
-#                REPORT_EMAIL_TO.
+# Email recipient/sender come from SMTP_TO / SMTP_FROM (see send_email.py).
+# Env overrides: VANCOUVER_DATA_DIR, CLAUDE_BIN, REPORT_LOG_DIR, REPORT_TIMEOUT.
 #
 set -uo pipefail
 
@@ -30,7 +30,6 @@ mkdir -p "$LOG_DIR"
 LOG="$LOG_DIR/reports.log"
 CLAUDE_BIN="${CLAUDE_BIN:-claude}"
 TIMEOUT_S="${REPORT_TIMEOUT:-1800}"
-EMAIL_TO="${REPORT_EMAIL_TO:-tech@davidhoeppner.ca}"
 
 ts() { date +'%Y-%m-%dT%H:%M:%S%z'; }
 log() { echo "$(ts) $*" >>"$LOG"; }
@@ -74,8 +73,9 @@ if [ "${#new[@]}" -eq 0 ]; then
   exit 0
 fi
 log "new reports: ${new[*]}"
-if .venv/bin/python scripts/send_email.py --to "$EMAIL_TO" "${new[@]}" >>"$LOG" 2>&1; then
-  log "emailed ${#new[@]} new report(s) to ${EMAIL_TO}"
+# Recipient/sender come from SMTP_TO / SMTP_FROM in the environment.
+if .venv/bin/python scripts/send_email.py "${new[@]}" >>"$LOG" 2>&1; then
+  log "emailed ${#new[@]} new report(s) to ${SMTP_TO:-(SMTP_TO unset)}"
 else
-  log "WARN email step failed (reports are still on disk)"
+  log "WARN email step failed or not configured (reports are still on disk)"
 fi
