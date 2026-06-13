@@ -6,25 +6,31 @@ AI-summarized reports of meeting minutes for Vancouver's government bodies:
 ## How it works
 
 ```
-┌─ home server, nightly 02:30 ──────────────┐   ┌─ Mac, Claude Code routines ─────────┐
-│ scripts/scrape.py                         │   │ council-reports    (Mon 08:30)      │
-│  · discovers + downloads agendas/minutes  │   │ parkboard-reports  (8th/22nd 08:45) │
-│  · downloads every cited bylaw/policy     │ → │ vsb-reports        (3rd 09:00)      │
-│  · extracts PDF text to .txt sidecars     │git│  · read manifest + extracted text   │
-│  · updates manifest.json per body         │   │  · write reports/<key>.md + .pdf    │
-│  · commits + pushes                       │   │  · commit + push                    │
-└───────────────────────────────────────────┘   └──────────────────┬──────────────────┘
-                                                                   │ push touching reports/*.pdf
-                                                ┌──────────────────▼──────────────────┐
-                                                │ GitHub Action emails the new PDFs   │
-                                                │ to tech@davidhoeppner.ca            │
-                                                └─────────────────────────────────────┘
+┌─ home server, nightly 02:30 (scripts/nightly.sh) ─────────────────┐
+│ 1. scripts/scrape.py                                              │
+│      · discovers + downloads agendas/minutes                      │
+│      · downloads every cited bylaw/policy                         │
+│      · extracts PDF text to .txt sidecars                         │
+│      · updates manifest.json per body, commits + pushes           │
+│ 2. scripts/generate_reports.sh                                    │
+│      · for each body: claude -p <prompt> (headless synthesis)     │
+│      · reads manifest + extracted text, writes reports/<key>.md   │
+│        and renders <key>.pdf                                      │
+│      · commits + pushes all new reports in one push               │
+└──────────────────────────────────────┬────────────────────────────┘
+                                        │ push touching reports/*.pdf
+                       ┌────────────────▼─────────────────┐
+                       │ GitHub Action emails the new PDFs │
+                       │ to tech@davidhoeppner.ca          │
+                       └───────────────────────────────────┘
 ```
 
-The scraper does **all** information gathering so the report routines do pure
+The scraper does **all** information gathering so the report step does pure
 synthesis. Reports are idempotent: one report per meeting, keyed
 `YYYY-MM-DD_<type>`; a meeting is "unreported" iff its `minutes.txt` exists
-and `reports/<key>.pdf` does not. Routines never rewrite existing reports.
+and `reports/<key>.pdf` does not. The report step never rewrites existing
+reports. Both halves run unattended on the server — nothing depends on a
+desktop app being open.
 
 ## Repo layout
 
@@ -67,21 +73,25 @@ Host github.com-vancouver
     IdentitiesOnly yes
 EOF
 
-# 2. Clone + venv
+# 2. Clone + repo-local venv (shared by scraper and PDF renderer)
 mkdir -p ~/vancouver_scraper/logs && cd ~/vancouver_scraper
 git clone git@github.com-vancouver:dhoeppne/vancouver_gov_meeting_minutes.git repo
-python3 -m venv venv && venv/bin/pip install -r repo/requirements.txt
-git -C repo config user.name "vancouver-scraper"
-git -C repo config user.email "tech@davidhoeppner.ca"
+cd repo
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+git config user.name "vancouver-scraper"
+git config user.email "tech@davidhoeppner.ca"
 
-# 3. Manual first run, then cron
-venv/bin/python repo/scripts/scrape.py
-crontab -e   # add:
-# 30 2 * * * /home/USER/vancouver_scraper/venv/bin/python /home/USER/vancouver_scraper/repo/scripts/scrape.py >> /home/USER/vancouver_scraper/logs/cron.log 2>&1
+# 3. Claude CLI for the report step (https://docs.claude.com/claude-code)
+#    Install and authenticate once: `claude login` (or export ANTHROPIC_API_KEY).
+
+# 4. Manual first run, then cron
+bash scripts/nightly.sh
+crontab -e   # add (runs scrape + report generation every night):
+# 30 2 * * * bash /home/USER/vancouver_scraper/repo/scripts/nightly.sh
 ```
 
-Useful flags: `--body council|parkboard|vsb`, `--dry-run` (discovery only),
-`--no-git`, `--window-start YYYY-MM-DD`, `--log-dir DIR`.
+Useful scraper flags: `--body council|parkboard|vsb`, `--dry-run` (discovery
+only), `--no-git`, `--window-start YYYY-MM-DD`, `--log-dir DIR`.
 
 ## Email notifications
 
@@ -90,17 +100,25 @@ Actions): `SMTP_SERVER`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`.
 Until they exist the email step skips silently; report PDFs are always
 committed regardless.
 
-## Report routines
+## Report generation (headless)
 
-Three Claude Code scheduled tasks on the Mac (they run while the desktop app
-is open; a missed run fires on next launch and is a cheap no-op when there is
-nothing new):
+After the scrape, [`scripts/generate_reports.sh`](scripts/generate_reports.sh)
+runs `claude -p` once per body using the self-contained prompts in
+[`scripts/report_prompts/`](scripts/report_prompts/). Each headless session
+does pure synthesis — reads the manifest + extracted text, writes
+`reports/<key>.md`, and renders `<key>.pdf` — and never touches git or the
+network. The wrapper owns all git: it commits and pushes every new report in
+one push, which triggers the email Action.
 
-| task | schedule | why |
-|---|---|---|
-| `council-reports` | Mon 08:30 weekly | ~5–6 meetings/month, minutes lag ~2 weeks |
-| `parkboard-reports` | 8th + 22nd 08:45 | bi-weekly meetings, minutes lag 1–2 weeks |
-| `vsb-reports` | 3rd of month 09:00 | ~monthly meetings, minutes approved at the *next* meeting |
+Permissions for the headless runs are scoped by the committed
+[`.claude/settings.json`](.claude/settings.json) allowlist (file tools +
+`.venv/bin/python` for rendering, no git or network), so cron runs never block
+on a permission prompt. Reports are processed at most 5 per body per run,
+oldest first, to bound cost.
+
+Cadence is simply "every night" — each body is a cheap no-op when nothing new
+has published (council minutes lag ~2 weeks, park board 1–2 weeks, VSB minutes
+are approved at the *next* monthly meeting; the board is dark Jul/Aug/Dec).
 
 Each report has fixed sections: TL;DR · Key Decisions & Votes · Bylaws &
 Policies Enacted or Discussed · Money & Budget Items · Contentious Items &

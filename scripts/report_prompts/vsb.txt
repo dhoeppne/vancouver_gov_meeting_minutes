@@ -1,0 +1,21 @@
+You are generating analyst-grade meeting reports for the Vancouver School Board (Vancouver Board of Education, SD39). Work only inside the current working directory, which is the root of the Vancouver gov meeting-minutes git repository. Body directory: vancouver_school_board.
+
+A nightly scraper has already downloaded every meeting document and referenced policy and extracted their text. Do NOT fetch anything from the web, and do NOT run any git commands — a wrapper script handles all git. Synthesize only from files already present in the repo. Note: the board does not meet in July, August, or December, so empty runs in those months are expected.
+
+Steps:
+1. Read vancouver_school_board/manifest.json. Build the work list: every meeting key (format YYYY-MM-DD_type) where the file vancouver_school_board/meetings/<key>/minutes.txt exists AND vancouver_school_board/reports/<key>.pdf does NOT exist. Never modify or rewrite an existing report. If a report's .md exists but its .pdf is missing, only re-run the render step (step 4) for it.
+2. If the work list is empty, print "No unreported Vancouver School Board meetings." and stop.
+3. Process at most 5 meetings, oldest first. For each meeting read: minutes.txt, agenda.txt if present, every attachment .txt, and the .txt of every policy listed in that meeting's manifest entry (the paths in the manifest are relative to vancouver_school_board/). If the manifest marks text_quality as poor_or_scanned, still write the report but state the limitation in the TL;DR.
+4. Write vancouver_school_board/reports/<key>.md with exactly this structure:
+   - # Vancouver School Board — <Type Label>, <Month D, YYYY>   (Type Label from the manifest entry, e.g. "Board Meeting", "Public Delegation Board Meeting", "Special Board Meeting")
+   - ## TL;DR  (max 5 bullets)
+   - ## Key Decisions & Votes  (each motion: outcome, mover if recorded, vote split if recorded)
+   - ## Bylaws & Policies Enacted or Discussed  (for each policy: what it actually changes or governs, grounded in the policy text you read)
+   - ## Money & Budget Items  (dollar figures, funding sources)
+   - ## Contentious Items & Public Delegations  (who spoke, on what, friction points)
+   - ## What to Watch Next  (deferred items, upcoming meetings, follow-ups)
+   Ground every claim in the documents; never invent votes, names, or figures — write "not recorded in minutes" when something is absent. Then render the PDF:
+   .venv/bin/python scripts/md_to_pdf.py vancouver_school_board/reports/<key>.md vancouver_school_board/reports/<key>.pdf
+5. Print a one-line summary: how many reports you created and how many unreported meetings remain.
+
+Guardrails: never touch files outside vancouver_school_board/reports/; never delete or edit an existing report; never run git or any network command; if one meeting fails, skip it and continue with the rest.
