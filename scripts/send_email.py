@@ -27,13 +27,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--to", required=True, help="recipient address")
     parser.add_argument("--subject", default=None, help="override subject")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="build the message and report it, but don't connect/send")
     parser.add_argument("pdfs", nargs="+", type=Path, help="report PDFs")
     args = parser.parse_args()
 
     server = os.environ.get("SMTP_SERVER")
-    if not server:
-        print("SMTP_SERVER unset; skipping email", file=sys.stderr)
-        return 0
     port = int(os.environ.get("SMTP_PORT", "465"))
     username = os.environ.get("SMTP_USERNAME", "")
     password = os.environ.get("SMTP_PASSWORD", "")
@@ -57,6 +56,19 @@ def main() -> int:
             p.read_bytes(), maintype="application", subtype="pdf",
             filename=p.name,
         )
+
+    if args.dry_run:
+        print(f"[dry-run] would send via {server or '(SMTP_SERVER unset)'}:{port}"
+              f" as {username or '(SMTP_USERNAME unset)'}")
+        print(f"[dry-run] To: {args.to}")
+        print(f"[dry-run] Subject: {msg['Subject']}")
+        for p in pdfs:
+            print(f"[dry-run] attach: {p.name} ({p.stat().st_size:,} bytes)")
+        return 0
+
+    if not server:
+        print("SMTP_SERVER unset; skipping email", file=sys.stderr)
+        return 0
 
     try:
         if port == 465:

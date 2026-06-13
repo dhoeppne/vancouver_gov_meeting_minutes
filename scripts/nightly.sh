@@ -14,8 +14,9 @@ set -uo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_DIR" || exit 1
 
-# cron runs with a minimal PATH and no API key — restore both so `node`,
-# `claude`, ANTHROPIC_API_KEY, SMTP_*, and VANCOUVER_DATA_DIR are available.
+# cron runs with a minimal PATH and no env — restore both so `node`, `claude`,
+# the Claude credential (CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY), SMTP_*,
+# and VANCOUVER_DATA_DIR are available.
 export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 [ -f "$HOME/vancouver_scraper/.env" ] && . "$HOME/vancouver_scraper/.env"
 

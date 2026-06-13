@@ -101,18 +101,36 @@ npm install -g @anthropic-ai/claude-code
 claude --version    # verify the install
 ```
 
-### 4. Configure the environment (`~/vancouver_scraper/.env`)
+### 4. Authenticate Claude
 
-`nightly.sh` sources this file. It holds the Claude API key, the data
-directory, and the SMTP settings for email. Use an API key from
-<https://console.anthropic.com/> (simplest for cron, which has no interactive
-session):
+Two options — pick one. **`nightly.sh` sources `~/vancouver_scraper/.env`, so
+whichever credential you use goes there.**
+
+**A) Subscription (Claude Pro/Max) — no per-token charges.** Generate a
+long-lived OAuth token tied to your subscription with `claude setup-token`. It
+needs a browser for the one-time authorization, so the easy path is to run it
+on your laptop (or anywhere with a browser) and copy the token to the server:
+
+```bash
+claude setup-token        # authorize in the browser, copy the printed token
+```
+
+Then put it in the server's `.env` as `CLAUDE_CODE_OAUTH_TOKEN` (see below).
+**Do not also set `ANTHROPIC_API_KEY`** — if present it takes precedence and
+bills per-token instead of using your subscription. (For interactive manual
+runs on the server you can instead `claude login`; cron then reuses the stored
+credentials.)
+
+**B) API key (pay-per-token)** from <https://console.anthropic.com/> — set
+`ANTHROPIC_API_KEY` in `.env` instead of the OAuth token.
 
 ```bash
 mkdir -p ~/vancouver_scraper
 umask 077
 cat > ~/vancouver_scraper/.env <<'EOF'
-export ANTHROPIC_API_KEY=sk-ant-...                  # Claude API key
+# --- Claude auth: use ONE of these ---
+export CLAUDE_CODE_OAUTH_TOKEN=...                   # (A) subscription token
+# export ANTHROPIC_API_KEY=sk-ant-...                # (B) API billing instead
 
 # Where all scraped data + reports are written (must exist / be mounted):
 export VANCOUVER_DATA_DIR=/mnt/hyperion_share_fast/vancouver_meeting_reports
@@ -125,8 +143,7 @@ export SMTP_PASSWORD=app-password-here
 EOF
 ```
 
-(Interactive `claude login` also works for manual runs, but the API key is what
-makes cron headless.)
+A few nightly headless sessions sit comfortably within Pro/Max limits.
 
 ### 5. GitHub deploy key (read-only is enough)
 
@@ -183,8 +200,8 @@ crontab -e
 ```
 
 `nightly.sh` fixes up `PATH` and sources `~/vancouver_scraper/.env` so cron's
-minimal environment can find `node`/`claude`, your API key, `VANCOUVER_DATA_DIR`,
-and the SMTP settings.
+minimal environment can find `node`/`claude`, your Claude credential,
+`VANCOUVER_DATA_DIR`, and the SMTP settings.
 
 Useful scraper flags: `--body council|parkboard|vsb`, `--dry-run` (discovery
 only), `--data-dir DIR`, `--window-start YYYY-MM-DD`, `--log-dir DIR`.
@@ -215,3 +232,43 @@ are approved at the *next* monthly meeting; the board is dark Jul/Aug/Dec).
 Each report has fixed sections: TL;DR · Key Decisions & Votes · Bylaws &
 Policies Enacted or Discussed · Money & Budget Items · Contentious Items &
 Public Delegations · What to Watch Next.
+
+## Verifying & testing
+
+All commands below assume `cd ~/vancouver_scraper/repo && source ~/vancouver_scraper/.env`.
+
+**Test email** without sending (checks config + which PDFs would attach):
+
+```bash
+.venv/bin/python scripts/send_email.py --to "$SMTP_USERNAME" --dry-run \
+  "$VANCOUVER_DATA_DIR"/vancouver_city_council/reports/*.pdf
+```
+
+Then send a real one to yourself (any PDF works) and check your inbox/spam:
+
+```bash
+.venv/bin/python scripts/send_email.py --to "$SMTP_USERNAME" \
+  "$(find "$VANCOUVER_DATA_DIR" -path '*/reports/*.pdf' | head -1)"
+# prints "emailed 1 report(s) to ..." on success
+```
+
+**Verify Claude actually ran.** The headless sessions' output (including each
+body's final summary line) is captured in the logs:
+
+```bash
+tail -n 100 ~/vancouver_scraper/logs/reports.log    # "generating <body> reports", summaries, "new reports: ..."
+tail -n 50  ~/vancouver_scraper/logs/cron.log       # overall nightly run
+ls -lt "$VANCOUVER_DATA_DIR"/*/reports/*.pdf | head # newest report files = proof of synthesis
+```
+
+To watch one body run live with full detail (turn count, token cost, result),
+run a single prompt in the foreground:
+
+```bash
+sed "s#__DATA_DIR__#$VANCOUVER_DATA_DIR#g" scripts/report_prompts/council.txt \
+  | claude -p --permission-mode acceptEdits --add-dir "$VANCOUVER_DATA_DIR" \
+           --verbose --output-format stream-json
+```
+
+A clean run ends with a `result` event; an auth failure surfaces immediately
+here (so this also confirms your `CLAUDE_CODE_OAUTH_TOKEN`/API key works).
