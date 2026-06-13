@@ -18,7 +18,8 @@ cd "$REPO_DIR" || exit 1
 # the Claude credential (CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY), SMTP_*,
 # and VANCOUVER_DATA_DIR are available.
 export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
-[ -f "$HOME/vancouver_scraper/.env" ] && . "$HOME/vancouver_scraper/.env"
+ENV_FILE="${VANCOUVER_ENV_FILE:-$HOME/vancouver_scraper/.env}"
+[ -f "$ENV_FILE" ] && . "$ENV_FILE"
 
 DATA_DIR="${VANCOUVER_DATA_DIR:-/mnt/hyperion_share_fast/vancouver_meeting_reports}"
 LOG_DIR="${REPORT_LOG_DIR:-$HOME/vancouver_scraper/logs}"

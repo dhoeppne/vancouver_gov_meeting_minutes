@@ -157,6 +157,10 @@ verified sending domain.
 
 A few nightly headless sessions sit comfortably within Pro/Max limits.
 
+Every script auto-loads this file (`~/vancouver_scraper/.env`, or
+`$VANCOUVER_ENV_FILE`), so you never have to `source` it by hand — running
+`scripts/send_email.py`, `scripts/scrape.py`, etc. directly just works.
+
 ### 5. GitHub deploy key (read-only is enough)
 
 The server only pulls script updates — it never pushes — so a **read-only**
@@ -247,7 +251,10 @@ Public Delegations · What to Watch Next.
 
 ## Verifying & testing
 
-All commands below assume `cd ~/vancouver_scraper/repo && source ~/vancouver_scraper/.env`.
+Run these from the repo directory (wherever you cloned it). The scripts
+**auto-load** `~/vancouver_scraper/.env` themselves — no manual `source` needed
+— so the data dir, SMTP, and Claude credential are picked up automatically.
+(Override the location with `VANCOUVER_ENV_FILE=/path/to/.env`.)
 
 **Test email** without sending (checks config — From/To/attachments — and sends
 nothing). From/To come from `$SMTP_FROM` / `$SMTP_TO`:

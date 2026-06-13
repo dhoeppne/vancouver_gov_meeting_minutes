@@ -26,6 +26,8 @@ import sys
 from email.message import EmailMessage
 from pathlib import Path
 
+from _env import load_env
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -39,6 +41,7 @@ def main() -> int:
     parser.add_argument("pdfs", nargs="+", type=Path, help="report PDFs")
     args = parser.parse_args()
 
+    load_env()  # pick up ~/vancouver_scraper/.env when run standalone
     server = os.environ.get("SMTP_SERVER")
     port = int(os.environ.get("SMTP_PORT", "587"))
     username = os.environ.get("SMTP_USERNAME", "")

@@ -24,6 +24,10 @@ set -uo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_DIR" || exit 1
 
+# Load config (data dir, SMTP, Claude credential) when run standalone.
+ENV_FILE="${VANCOUVER_ENV_FILE:-$HOME/vancouver_scraper/.env}"
+[ -f "$ENV_FILE" ] && . "$ENV_FILE"
+
 DATA_DIR="${VANCOUVER_DATA_DIR:-/mnt/hyperion_share_fast/vancouver_meeting_reports}"
 LOG_DIR="${REPORT_LOG_DIR:-$HOME/vancouver_scraper/logs}"
 mkdir -p "$LOG_DIR"

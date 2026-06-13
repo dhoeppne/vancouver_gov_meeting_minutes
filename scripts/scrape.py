@@ -37,6 +37,8 @@ from bs4 import BeautifulSoup
 from curl_cffi import requests
 from curl_cffi.requests.exceptions import HTTPError, RequestException
 
+from _env import load_env
+
 BODY_DIRS = {
     "council": "vancouver_city_council",
     "parkboard": "vancouver_park_board",
@@ -983,8 +985,11 @@ def main() -> int:
                         help="also write a rotating log file here")
     args = parser.parse_args()
 
+    load_env()  # pick up ~/vancouver_scraper/.env when run standalone
     if args.data_dir:
         DATA_DIR = args.data_dir
+    else:
+        DATA_DIR = Path(os.environ.get("VANCOUVER_DATA_DIR", DEFAULT_DATA_DIR))
     DATA_DIR = DATA_DIR.resolve()
 
     handlers: list[logging.Handler] = [logging.StreamHandler(sys.stderr)]

@@ -34,6 +34,10 @@ done
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_DIR" || exit 1
 
+# Load config (for VANCOUVER_DATA_DIR) when run standalone; --data-dir wins.
+ENV_FILE="${VANCOUVER_ENV_FILE:-$HOME/vancouver_scraper/.env}"
+[ -f "$ENV_FILE" ] && . "$ENV_FILE"
+
 DATA_DIR="${DATA_DIR_ARG:-${VANCOUVER_DATA_DIR:-/mnt/hyperion_share_fast/vancouver_meeting_reports}}"
 BODIES=(vancouver_city_council vancouver_park_board vancouver_school_board)
 
