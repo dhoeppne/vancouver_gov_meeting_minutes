@@ -1,0 +1,561 @@
+{
+  "body": "vancouver_park_board",
+  "schema_version": 1,
+  "last_run": "2026-06-12T20:14:08-07:00",
+  "backfill_complete": true,
+  "probed_empty": {},
+  "meetings": {
+    "2026-03-30_regular": {
+      "date": "2026-03-30",
+      "type": "regular",
+      "type_label": "Park Board (Regular)",
+      "status": "complete",
+      "source_url": "https://parkboardmeetings.vancouver.ca/2026/20260330/index.htm",
+      "agenda": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260330/AGENDA_PB20260330.pdf",
+        "pdf": "meetings/2026-03-30_regular/agenda.pdf",
+        "txt": "meetings/2026-03-30_regular/agenda.txt"
+      },
+      "minutes": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260309/MINUTES_pb_20260309-Board.pdf",
+        "published": true,
+        "pdf": "meetings/2026-03-30_regular/minutes.pdf",
+        "txt": "meetings/2026-03-30_regular/minutes.txt",
+        "text_quality": "ok"
+      },
+      "attachments": [
+        {
+          "name": "HIGHLIGHTS-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/HIGHLIGHTS-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/HIGHLIGHTS-20260330.txt"
+        },
+        {
+          "name": "REPORT-ColumbiaParkRenewal-ConceptPlan-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/REPORT-ColumbiaParkRenewal-ConceptPlan-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/REPORT-ColumbiaParkRenewal-ConceptPlan-20260330.txt"
+        },
+        {
+          "name": "PRESENTATION-ColumbiaParkRenewal-ConceptPlan-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/PRESENTATION-ColumbiaParkRenewal-ConceptPlan-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/PRESENTATION-ColumbiaParkRenewal-ConceptPlan-20260330.txt"
+        },
+        {
+          "name": "REPORT-BeaconsfieldParkSyntheticTurfField-ConceptPlan-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/REPORT-BeaconsfieldParkSyntheticTurfField-ConceptPlan-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/REPORT-BeaconsfieldParkSyntheticTurfField-ConceptPlan-20260330.txt"
+        },
+        {
+          "name": "DECISION-BeaconsfieldParkSyntheticTurfField-ConceptPlan-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/DECISION-BeaconsfieldParkSyntheticTurfField-ConceptPlan-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/DECISION-BeaconsfieldParkSyntheticTurfField-ConceptPlan-20260330.txt"
+        },
+        {
+          "name": "PRESENTATION-BeaconsfieldParkSyntheticTurfField-ConceptPlan-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/PRESENTATION-BeaconsfieldParkSyntheticTurfField-ConceptPlan-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/PRESENTATION-BeaconsfieldParkSyntheticTurfField-ConceptPlan-20260330.txt"
+        },
+        {
+          "name": "REPORT-BardontheBeach-BurrardCivicMarinaTemporaryStorageFacility-LeaseofSpace-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/REPORT-BardontheBeach-BurrardCivicMarinaTemporaryStorageFacility-LeaseofSpace-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/REPORT-BardontheBeach-BurrardCivicMarinaTemporaryStorageFacility-LeaseofSpace-20260330.txt"
+        },
+        {
+          "name": "PRESENTATION-BOTB-BurrardCivicMarinaTemporaryStorageFacility-LeaseofSpace-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/PRESENTATION-BOTB-BurrardCivicMarinaTemporaryStorageFacility-LeaseofSpace-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/PRESENTATION-BOTB-BurrardCivicMarinaTemporaryStorageFacility-LeaseofSpace-20260330.txt"
+        },
+        {
+          "name": "REPORT-VancouverAquariumDevelopmentPermit-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/REPORT-VancouverAquariumDevelopmentPermit-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/REPORT-VancouverAquariumDevelopmentPermit-20260330.txt"
+        },
+        {
+          "name": "PRESENTATION-VancouverAquariumDevelopmentPermit-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/PRESENTATION-VancouverAquariumDevelopmentPermit-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/PRESENTATION-VancouverAquariumDevelopmentPermit-20260330.txt"
+        },
+        {
+          "name": "REPORT-2026OutdoorPoolsOperationalPlan-Update-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/REPORT-2026OutdoorPoolsOperationalPlan-Update-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/REPORT-2026OutdoorPoolsOperationalPlan-Update-20260330.txt"
+        },
+        {
+          "name": "MEMO-2026OutdoorPoolsOperationalPlan-Update-SupplementalInformation-20260326.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/MEMO-2026OutdoorPoolsOperationalPlan-Update-SupplementalInformation-20260326.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/MEMO-2026OutdoorPoolsOperationalPlan-Update-SupplementalInformation-20260326.txt"
+        },
+        {
+          "name": "PRESENTATION-2026OutdoorPoolsOperationalPlan-Update-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/PRESENTATION-2026OutdoorPoolsOperationalPlan-Update-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/PRESENTATION-2026OutdoorPoolsOperationalPlan-Update-20260330.txt"
+        },
+        {
+          "name": "PRESENTATION-ChairsReport-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/PRESENTATION-ChairsReport-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/PRESENTATION-ChairsReport-20260330.txt"
+        },
+        {
+          "name": "PRESENTATION-AllocationandAffiliationPolicies-Update-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/PRESENTATION-AllocationandAffiliationPolicies-Update-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/PRESENTATION-AllocationandAffiliationPolicies-Update-20260330.txt"
+        },
+        {
+          "name": "REPORT-GeneralManagersReport-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/REPORT-GeneralManagersReport-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/REPORT-GeneralManagersReport-20260330.txt"
+        },
+        {
+          "name": "PRESENTATION-GeneralManagersReport-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/PRESENTATION-GeneralManagersReport-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/PRESENTATION-GeneralManagersReport-20260330.txt"
+        },
+        {
+          "name": "MOTION-2030-2038BarclayStreetRezoningImpactsonStanleyPark-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/MOTION-2030-2038BarclayStreetRezoningImpactsonStanleyPark-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/MOTION-2030-2038BarclayStreetRezoningImpactsonStanleyPark-20260330.txt"
+        },
+        {
+          "name": "DECISION-2030-2038BarclayStreetRezoningImpactsonStanleyPark-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/DECISION-2030-2038BarclayStreetRezoningImpactsonStanleyPark-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/DECISION-2030-2038BarclayStreetRezoningImpactsonStanleyPark-20260330.txt"
+        },
+        {
+          "name": "DECISION-RestoringLifeguardServicesatKeyVancouverBeaches-20260330.pdf",
+          "pdf": "meetings/2026-03-30_regular/attachments/DECISION-RestoringLifeguardServicesatKeyVancouverBeaches-20260330.pdf",
+          "txt": "meetings/2026-03-30_regular/attachments/DECISION-RestoringLifeguardServicesatKeyVancouverBeaches-20260330.txt"
+        }
+      ],
+      "bylaws": [],
+      "first_seen": "2026-06-12",
+      "last_checked": "2026-06-12"
+    },
+    "2026-04-13_regular": {
+      "date": "2026-04-13",
+      "type": "regular",
+      "type_label": "Park Board (Regular)",
+      "status": "complete",
+      "source_url": "https://parkboardmeetings.vancouver.ca/2026/20260413/index.htm",
+      "agenda": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260413/AGENDA_PB20260413.pdf",
+        "pdf": "meetings/2026-04-13_regular/agenda.pdf",
+        "txt": "meetings/2026-04-13_regular/agenda.txt"
+      },
+      "minutes": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260330/MINUTES_pb_20260330-Board.pdf",
+        "published": true,
+        "pdf": "meetings/2026-04-13_regular/minutes.pdf",
+        "txt": "meetings/2026-04-13_regular/minutes.txt",
+        "text_quality": "ok"
+      },
+      "attachments": [
+        {
+          "name": "HIGHLIGHTS-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/HIGHLIGHTS-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/HIGHLIGHTS-20260413.txt"
+        },
+        {
+          "name": "REPORT-ElectricCommuterFerryServiceAdjacentHarbourGreenPark-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/REPORT-ElectricCommuterFerryServiceAdjacentHarbourGreenPark-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/REPORT-ElectricCommuterFerryServiceAdjacentHarbourGreenPark-20260413.txt"
+        },
+        {
+          "name": "PRESENTATION-ElectricFerryServiceAdjacentHarbourGreenPark-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/PRESENTATION-ElectricFerryServiceAdjacentHarbourGreenPark-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/PRESENTATION-ElectricFerryServiceAdjacentHarbourGreenPark-20260413.txt"
+        },
+        {
+          "name": "DECISION-ElectricCommuterFerryServiceAdjacentHarbourGreenPark-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/DECISION-ElectricCommuterFerryServiceAdjacentHarbourGreenPark-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/DECISION-ElectricCommuterFerryServiceAdjacentHarbourGreenPark-20260413.txt"
+        },
+        {
+          "name": "REPORT-BurrardSlopesPark-ConceptPlan-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/REPORT-BurrardSlopesPark-ConceptPlan-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/REPORT-BurrardSlopesPark-ConceptPlan-20260413.txt"
+        },
+        {
+          "name": "PRESENTATION-BurrardSlopesPark-ConceptPlan-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/PRESENTATION-BurrardSlopesPark-ConceptPlan-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/PRESENTATION-BurrardSlopesPark-ConceptPlan-20260413.txt"
+        },
+        {
+          "name": "REPORT-SouthVancouverParkAmenities-ConceptPlans-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/REPORT-SouthVancouverParkAmenities-ConceptPlans-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/REPORT-SouthVancouverParkAmenities-ConceptPlans-20260413.txt"
+        },
+        {
+          "name": "PRESENTATION-SouthVancouverParkAmenities-ConceptPlan-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/PRESENTATION-SouthVancouverParkAmenities-ConceptPlan-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/PRESENTATION-SouthVancouverParkAmenities-ConceptPlan-20260413.txt"
+        },
+        {
+          "name": "DECISION-SouthVancouverParkAmenities-ConceptPlan-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/DECISION-SouthVancouverParkAmenities-ConceptPlan-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/DECISION-SouthVancouverParkAmenities-ConceptPlan-20260413.txt"
+        },
+        {
+          "name": "PRESENTATION-ChairsReport-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/PRESENTATION-ChairsReport-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/PRESENTATION-ChairsReport-20260413.txt"
+        },
+        {
+          "name": "PRESENTATION-VanPlayImplementation2025-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/PRESENTATION-VanPlayImplementation2025-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/PRESENTATION-VanPlayImplementation2025-20260413.txt"
+        },
+        {
+          "name": "REPORT-GeneralManagersReport-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/REPORT-GeneralManagersReport-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/REPORT-GeneralManagersReport-20260413.txt"
+        },
+        {
+          "name": "PRESENTATION-GeneralManagersReport-20260413.pdf",
+          "pdf": "meetings/2026-04-13_regular/attachments/PRESENTATION-GeneralManagersReport-20260413.pdf",
+          "txt": "meetings/2026-04-13_regular/attachments/PRESENTATION-GeneralManagersReport-20260413.txt"
+        }
+      ],
+      "bylaws": [],
+      "first_seen": "2026-06-12",
+      "last_checked": "2026-06-12"
+    },
+    "2026-04-27_regular": {
+      "date": "2026-04-27",
+      "type": "regular",
+      "type_label": "Park Board (Regular)",
+      "status": "complete",
+      "source_url": "https://parkboardmeetings.vancouver.ca/2026/20260427/index.htm",
+      "agenda": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260427/AGENDA_PB20260427.pdf",
+        "pdf": "meetings/2026-04-27_regular/agenda.pdf",
+        "txt": "meetings/2026-04-27_regular/agenda.txt"
+      },
+      "minutes": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260413/MINUTES_pb_20260413-Board.pdf",
+        "published": true,
+        "pdf": "meetings/2026-04-27_regular/minutes.pdf",
+        "txt": "meetings/2026-04-27_regular/minutes.txt",
+        "text_quality": "ok"
+      },
+      "attachments": [
+        {
+          "name": "HIGHLIGHTS-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/HIGHLIGHTS-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/HIGHLIGHTS-20260427.txt"
+        },
+        {
+          "name": "REPORT-TemporarySenakwWelcomeCentreatVanierPark-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/REPORT-TemporarySenakwWelcomeCentreatVanierPark-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/REPORT-TemporarySenakwWelcomeCentreatVanierPark-20260427.txt"
+        },
+        {
+          "name": "DECISION-SenakwPartnershipWelcomeCentre-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/DECISION-SenakwPartnershipWelcomeCentre-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/DECISION-SenakwPartnershipWelcomeCentre-20260427.txt"
+        },
+        {
+          "name": "REPORT-2026CityofVancouverPublicFireworksCelebration-SpecialEvent-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/REPORT-2026CityofVancouverPublicFireworksCelebration-SpecialEvent-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/REPORT-2026CityofVancouverPublicFireworksCelebration-SpecialEvent-20260427.txt"
+        },
+        {
+          "name": "PRESENTATION-2026PublicFireworksCelebration-SpecialEvent-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/PRESENTATION-2026PublicFireworksCelebration-SpecialEvent-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/PRESENTATION-2026PublicFireworksCelebration-SpecialEvent-20260427.txt"
+        },
+        {
+          "name": "PRESENTATION-ChairsReport-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/PRESENTATION-ChairsReport-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/PRESENTATION-ChairsReport-20260427.txt"
+        },
+        {
+          "name": "REPORT-GeneralManagersReport-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/REPORT-GeneralManagersReport-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/REPORT-GeneralManagersReport-20260427.txt"
+        },
+        {
+          "name": "PRESENTATION-GeneralManagersReport-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/PRESENTATION-GeneralManagersReport-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/PRESENTATION-GeneralManagersReport-20260427.txt"
+        },
+        {
+          "name": "MOTION-ReaffirmingParkBoardIndependenceCapitalPlanningforParkBoardAssets-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/MOTION-ReaffirmingParkBoardIndependenceCapitalPlanningforParkBoardAssets-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/MOTION-ReaffirmingParkBoardIndependenceCapitalPlanningforParkBoardAssets-20260427.txt"
+        },
+        {
+          "name": "DECISION-ReaffirmingParkBoardIndependenceCapitalPlanningforParkBoardAssets-20260427.pdf",
+          "pdf": "meetings/2026-04-27_regular/attachments/DECISION-ReaffirmingParkBoardIndependenceCapitalPlanningforParkBoardAssets-20260427.pdf",
+          "txt": "meetings/2026-04-27_regular/attachments/DECISION-ReaffirmingParkBoardIndependenceCapitalPlanningforParkBoardAssets-20260427.txt"
+        }
+      ],
+      "bylaws": [],
+      "first_seen": "2026-06-12",
+      "last_checked": "2026-06-12"
+    },
+    "2026-05-04_regular": {
+      "date": "2026-05-04",
+      "type": "regular",
+      "type_label": "Park Board (Regular)",
+      "status": "complete",
+      "source_url": "https://parkboardmeetings.vancouver.ca/2026/20260504/index.htm",
+      "agenda": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260504/AGENDA_PB20260504.pdf",
+        "pdf": "meetings/2026-05-04_regular/agenda.pdf",
+        "txt": "meetings/2026-05-04_regular/agenda.txt"
+      },
+      "minutes": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260427/MINUTES_pb_20260427-Board.pdf",
+        "published": true,
+        "pdf": "meetings/2026-05-04_regular/minutes.pdf",
+        "txt": "meetings/2026-05-04_regular/minutes.txt",
+        "text_quality": "ok"
+      },
+      "attachments": [
+        {
+          "name": "HIGHLIGHTS-20260504.pdf",
+          "pdf": "meetings/2026-05-04_regular/attachments/HIGHLIGHTS-20260504.pdf",
+          "txt": "meetings/2026-05-04_regular/attachments/HIGHLIGHTS-20260504.txt"
+        },
+        {
+          "name": "REPORT-TreeInspectionPolicy-20260504.pdf",
+          "pdf": "meetings/2026-05-04_regular/attachments/REPORT-TreeInspectionPolicy-20260504.pdf",
+          "txt": "meetings/2026-05-04_regular/attachments/REPORT-TreeInspectionPolicy-20260504.txt"
+        },
+        {
+          "name": "PRESENTATION-TreeInspectionPolicy-20260504.pdf",
+          "pdf": "meetings/2026-05-04_regular/attachments/PRESENTATION-TreeInspectionPolicy-20260504.pdf",
+          "txt": "meetings/2026-05-04_regular/attachments/PRESENTATION-TreeInspectionPolicy-20260504.txt"
+        },
+        {
+          "name": "PRESENTATION-ChairsReport-20260504.pdf",
+          "pdf": "meetings/2026-05-04_regular/attachments/PRESENTATION-ChairsReport-20260504.pdf",
+          "txt": "meetings/2026-05-04_regular/attachments/PRESENTATION-ChairsReport-20260504.txt"
+        },
+        {
+          "name": "REPORT-GeneralManagersReport-20260504.pdf",
+          "pdf": "meetings/2026-05-04_regular/attachments/REPORT-GeneralManagersReport-20260504.pdf",
+          "txt": "meetings/2026-05-04_regular/attachments/REPORT-GeneralManagersReport-20260504.txt"
+        },
+        {
+          "name": "PRESENTATION-GeneralManagersReport-20260504.pdf",
+          "pdf": "meetings/2026-05-04_regular/attachments/PRESENTATION-GeneralManagersReport-20260504.pdf",
+          "txt": "meetings/2026-05-04_regular/attachments/PRESENTATION-GeneralManagersReport-20260504.txt"
+        },
+        {
+          "name": "MOTION-HonouringCharlieCuzzetto-BeaconsfieldParkCommunityLegacy-20260504.pdf",
+          "pdf": "meetings/2026-05-04_regular/attachments/MOTION-HonouringCharlieCuzzetto-BeaconsfieldParkCommunityLegacy-20260504.pdf",
+          "txt": "meetings/2026-05-04_regular/attachments/MOTION-HonouringCharlieCuzzetto-BeaconsfieldParkCommunityLegacy-20260504.txt"
+        },
+        {
+          "name": "MOTION-UrgentReviewofBeachParkingFeesAffordabilityandAccessibilityatJerichoLocarnoSpani.pdf",
+          "pdf": "meetings/2026-05-04_regular/attachments/MOTION-UrgentReviewofBeachParkingFeesAffordabilityandAccessibilityatJerichoLocarnoSpani.pdf",
+          "txt": "meetings/2026-05-04_regular/attachments/MOTION-UrgentReviewofBeachParkingFeesAffordabilityandAccessibilityatJerichoLocarnoSpani.txt"
+        },
+        {
+          "name": "MOTION-ReducingParkingFeesatSpanishBanksfor2026-20260504.pdf",
+          "pdf": "meetings/2026-05-04_regular/attachments/MOTION-ReducingParkingFeesatSpanishBanksfor2026-20260504.pdf",
+          "txt": "meetings/2026-05-04_regular/attachments/MOTION-ReducingParkingFeesatSpanishBanksfor2026-20260504.txt"
+        }
+      ],
+      "bylaws": [
+        {
+          "ref": "By-law No. 2849",
+          "number": "2849",
+          "pdf": "bylaws/2849.pdf",
+          "txt": "bylaws/2849.txt",
+          "resolved": true
+        },
+        {
+          "ref": "By-law No. 5895",
+          "number": "5895",
+          "pdf": "bylaws/5895.pdf",
+          "txt": "bylaws/5895.txt",
+          "resolved": true
+        }
+      ],
+      "first_seen": "2026-06-12",
+      "last_checked": "2026-06-12"
+    },
+    "2026-05-25_regular": {
+      "date": "2026-05-25",
+      "type": "regular",
+      "type_label": "Park Board (Regular)",
+      "status": "complete",
+      "source_url": "https://parkboardmeetings.vancouver.ca/2026/20260525/index.htm",
+      "agenda": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260525/AGENDA_PB20260525.pdf",
+        "pdf": "meetings/2026-05-25_regular/agenda.pdf",
+        "txt": "meetings/2026-05-25_regular/agenda.txt"
+      },
+      "minutes": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260504/MINUTES_pb_20260504-Board.pdf",
+        "published": true,
+        "pdf": "meetings/2026-05-25_regular/minutes.pdf",
+        "txt": "meetings/2026-05-25_regular/minutes.txt",
+        "text_quality": "ok"
+      },
+      "attachments": [
+        {
+          "name": "HIGHLIGHTS-20260525.pdf",
+          "pdf": "meetings/2026-05-25_regular/attachments/HIGHLIGHTS-20260525.pdf",
+          "txt": "meetings/2026-05-25_regular/attachments/HIGHLIGHTS-20260525.txt"
+        },
+        {
+          "name": "REPORT-BardontheBeach-NewMultiYearAgreementFramework-20260525.pdf",
+          "pdf": "meetings/2026-05-25_regular/attachments/REPORT-BardontheBeach-NewMultiYearAgreementFramework-20260525.pdf",
+          "txt": "meetings/2026-05-25_regular/attachments/REPORT-BardontheBeach-NewMultiYearAgreementFramework-20260525.txt"
+        },
+        {
+          "name": "PRESENTATION-BardontheBeach-NewMultiYearAgreementFramework-20260525.pdf",
+          "pdf": "meetings/2026-05-25_regular/attachments/PRESENTATION-BardontheBeach-NewMultiYearAgreementFramework-20260525.pdf",
+          "txt": "meetings/2026-05-25_regular/attachments/PRESENTATION-BardontheBeach-NewMultiYearAgreementFramework-20260525.txt"
+        },
+        {
+          "name": "PRESENTATION-ChairsReport-20260525.pdf",
+          "pdf": "meetings/2026-05-25_regular/attachments/PRESENTATION-ChairsReport-20260525.pdf",
+          "txt": "meetings/2026-05-25_regular/attachments/PRESENTATION-ChairsReport-20260525.txt"
+        },
+        {
+          "name": "REPORT-GeneralManagersReport-20260525.pdf",
+          "pdf": "meetings/2026-05-25_regular/attachments/REPORT-GeneralManagersReport-20260525.pdf",
+          "txt": "meetings/2026-05-25_regular/attachments/REPORT-GeneralManagersReport-20260525.txt"
+        },
+        {
+          "name": "PRESENTATION-GeneralManagersReport-20260525.pdf",
+          "pdf": "meetings/2026-05-25_regular/attachments/PRESENTATION-GeneralManagersReport-20260525.pdf",
+          "txt": "meetings/2026-05-25_regular/attachments/PRESENTATION-GeneralManagersReport-20260525.txt"
+        },
+        {
+          "name": "MOTION-RecognitionJimCliveHowardKelseyKitsBeach-20260525.pdf",
+          "pdf": "meetings/2026-05-25_regular/attachments/MOTION-RecognitionJimCliveHowardKelseyKitsBeach-20260525.pdf",
+          "txt": "meetings/2026-05-25_regular/attachments/MOTION-RecognitionJimCliveHowardKelseyKitsBeach-20260525.txt"
+        },
+        {
+          "name": "MOTION-Waiving2026VPBFeesItalianDayonTheDrive-20260525.pdf",
+          "pdf": "meetings/2026-05-25_regular/attachments/MOTION-Waiving2026VPBFeesItalianDayonTheDrive-20260525.pdf",
+          "txt": "meetings/2026-05-25_regular/attachments/MOTION-Waiving2026VPBFeesItalianDayonTheDrive-20260525.txt"
+        },
+        {
+          "name": "DECISION-Waiving2026VPBFeesItalianDayonTheDrive-20260525.pdf",
+          "pdf": "meetings/2026-05-25_regular/attachments/DECISION-Waiving2026VPBFeesItalianDayonTheDrive-20260525.pdf",
+          "txt": "meetings/2026-05-25_regular/attachments/DECISION-Waiving2026VPBFeesItalianDayonTheDrive-20260525.txt"
+        }
+      ],
+      "bylaws": [],
+      "first_seen": "2026-06-12",
+      "last_checked": "2026-06-12"
+    },
+    "2026-06-01_regular": {
+      "date": "2026-06-01",
+      "type": "regular",
+      "type_label": "Park Board (Regular)",
+      "status": "complete",
+      "source_url": "https://parkboardmeetings.vancouver.ca/2026/20260601/index.htm",
+      "agenda": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260601/AGENDA_PB20260601.pdf",
+        "pdf": "meetings/2026-06-01_regular/agenda.pdf",
+        "txt": "meetings/2026-06-01_regular/agenda.txt"
+      },
+      "minutes": {
+        "url": "https://parkboardmeetings.vancouver.ca/2026/20260525/MINUTES_pb_20260525-Board.pdf",
+        "published": true,
+        "pdf": "meetings/2026-06-01_regular/minutes.pdf",
+        "txt": "meetings/2026-06-01_regular/minutes.txt",
+        "text_quality": "ok"
+      },
+      "attachments": [
+        {
+          "name": "HIGHLIGHTS-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/HIGHLIGHTS-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/HIGHLIGHTS-20260601.txt"
+        },
+        {
+          "name": "REPORT-BurrardViewHospice-VCHLeaseRenewal-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/REPORT-BurrardViewHospice-VCHLeaseRenewal-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/REPORT-BurrardViewHospice-VCHLeaseRenewal-20260601.txt"
+        },
+        {
+          "name": "PRESENTATION-BurrardViewHospice-VCH-LeaseAgreementRenewal-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/PRESENTATION-BurrardViewHospice-VCH-LeaseAgreementRenewal-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/PRESENTATION-BurrardViewHospice-VCH-LeaseAgreementRenewal-20260601.txt"
+        },
+        {
+          "name": "REPORT-DesignatedSmokingAreaSpecialEventsSummer2026-PilotProgram-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/REPORT-DesignatedSmokingAreaSpecialEventsSummer2026-PilotProgram-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/REPORT-DesignatedSmokingAreaSpecialEventsSummer2026-PilotProgram-20260601.txt"
+        },
+        {
+          "name": "PRESENTATION-DesignatedSmokingAreaSpecialEventsSummer2026-PilotProgram-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/PRESENTATION-DesignatedSmokingAreaSpecialEventsSummer2026-PilotProgram-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/PRESENTATION-DesignatedSmokingAreaSpecialEventsSummer2026-PilotProgram-20260601.txt"
+        },
+        {
+          "name": "REPORT-IndigenousCommunity-ledCulturalEvents-ReportBack-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/REPORT-IndigenousCommunity-ledCulturalEvents-ReportBack-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/REPORT-IndigenousCommunity-ledCulturalEvents-ReportBack-20260601.txt"
+        },
+        {
+          "name": "PRESENTATION-IndigenousCommunity-ledCulturalEvents-ReportBack-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/PRESENTATION-IndigenousCommunity-ledCulturalEvents-ReportBack-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/PRESENTATION-IndigenousCommunity-ledCulturalEvents-ReportBack-20260601.txt"
+        },
+        {
+          "name": "PRESENTATION-ChairsReport-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/PRESENTATION-ChairsReport-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/PRESENTATION-ChairsReport-20260601.txt"
+        },
+        {
+          "name": "REPORT-GeneralManagersReport-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/REPORT-GeneralManagersReport-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/REPORT-GeneralManagersReport-20260601.txt"
+        },
+        {
+          "name": "PRESENTATION-GeneralManagersReport-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/PRESENTATION-GeneralManagersReport-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/PRESENTATION-GeneralManagersReport-20260601.txt"
+        },
+        {
+          "name": "MOTION-ProhibitionRestrictionMotorizedPersonalWatercraftBurrardInlet-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/MOTION-ProhibitionRestrictionMotorizedPersonalWatercraftBurrardInlet-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/MOTION-ProhibitionRestrictionMotorizedPersonalWatercraftBurrardInlet-20260601.txt"
+        },
+        {
+          "name": "MOTION-ThinkAccessiblePlay-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/MOTION-ThinkAccessiblePlay-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/MOTION-ThinkAccessiblePlay-20260601.txt"
+        },
+        {
+          "name": "DECISION-ThinkAccessiblePlay-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/DECISION-ThinkAccessiblePlay-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/DECISION-ThinkAccessiblePlay-20260601.txt"
+        },
+        {
+          "name": "MOTION-ThinkFreeSwim-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/MOTION-ThinkFreeSwim-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/MOTION-ThinkFreeSwim-20260601.txt"
+        },
+        {
+          "name": "DECISION-ThinkFreeSwim-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/DECISION-ThinkFreeSwim-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/DECISION-ThinkFreeSwim-20260601.txt"
+        },
+        {
+          "name": "MOTION-BeachSafetyMarineProtection-20260601.pdf",
+          "pdf": "meetings/2026-06-01_regular/attachments/MOTION-BeachSafetyMarineProtection-20260601.pdf",
+          "txt": "meetings/2026-06-01_regular/attachments/MOTION-BeachSafetyMarineProtection-20260601.txt"
+        }
+      ],
+      "bylaws": [
+        {
+          "ref": "By-law No. 5655",
+          "number": "5655",
+          "pdf": "bylaws/5655.pdf",
+          "txt": "bylaws/5655.txt",
+          "resolved": true
+        }
+      ],
+      "first_seen": "2026-06-12",
+      "last_checked": "2026-06-12"
+    }
+  }
+}

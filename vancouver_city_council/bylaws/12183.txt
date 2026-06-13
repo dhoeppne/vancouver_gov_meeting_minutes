@@ -1,0 +1,329 @@
+CITY OF VANCOUVER
+BRITISH COLUMBIA
+VANCOUVER UTILITIES DEVELOPMENT COST
+LEVY BY-LAW NO. 12183
+This By-law is printed under and
+by authority of the Council of
+the City of VancouverTABLE OF CONTENTS
+PREAMBLE
+SECTION 1
+INTERPRETATION
+1.1 Name of By-law
+1.2 Definitions
+1.3 Table of contents
+1.4 Schedules
+1.5 Severability
+SECTION 2
+LEVY AREA
+2.1 Levy area
+2.2 Projects
+2.3 Types of projects
+SECTION 3
+DEVELOPMENT COST LEVIES
+3.1 Imposition of levies
+3.2 Waiver for for-profit affordable rental housing
+3.3 General levy
+3.4 Application of levy to less than four dwelling units
+3.5 Alteration or extension of existing building or structure
+3.6 Staged development
+3.7 Aggregate levy
+3.8 Payment of levy by installments
+3.9 Realization on security
+3.10 Default in payment of levy installments
+3.11 Change in use of excluded floor area
+3.12 Change in use of excluded land or development
+SECTION 4
+ENACTMENT
+4.1 Force and effect
+SCHEDULES
+Schedule A - Part 1
+- Part 2
+- Part 3
+iBY-LAW NO. 12183
+A By-law to impose development
+cost levies for utilities in the city
+PREAMBLE
+Council is satisfied that the amounts raised by levies imposed by this By-law in the general area
+are unlikely to exceed the estimated costs of projects for the general area.
+Council has determined that imposing levies in the amounts set out in this By-law in the general
+area to contribute to the costs of projects for the general area are fair and equitable.
+Council is excluding those areas of land described in Part 1 of Schedule A from this By-law
+because Council has previously determined that development anticipated in those areas will
+contribute to the need to provide capital projects, and has previously imposed development cost
+levies with respect to those areas.
+Council is excluding those areas of land described in Parts 2 and 3 of Schedule A from this
+By-law because Council has previously determined that development anticipated in those areas
+will contribute to the need to provide capital projects, and has previously provided for them by
+way of official development plans, comprehensive district rezoning, alternate funding
+arrangements, or other appropriate measures.
+THE COUNCIL OF THE CITY OF VANCOUVER, in public meeting, enacts as follows:
+SECTION 1
+INTERPRETATION
+Name of By-law
+1.1 The name of this By-law, for citation, is the “Vancouver Utilities Development Cost Levy
+By-law”.
+Definitions
+1.2 In this By-law:
+"Artist Studio - Class A", which means the use of premises for the production of dance,
+live music, creative writing, painting, drawings, pottery or sculpture, video, moving or still
+photography, none of which involves amplified sound or one or more of the materials or
+processes specified under Artist Studio - Class B, but does not include premises used
+for residential purposes;
+"Artist Studio - Class B", which means the use of premises for the production of (a)
+dance or live music involving electronically amplified sound, (b) moving or still
+photography (excluding video) involving on-site film processing, (c) paintings, drawings,pottery or sculpture involving the use of fibreglass, epoxy and other toxic or hazardous
+materials or one or more of the following processes: welding, woodworking, spray
+painting, silk screening or fired ceramics, but does not include premises used for
+residential purposes;
+"building permit" means a building permit issued under the Building By-law;
+"child care" means the use of premises operated as a community care facility by one or
+more persons licensed under the Community Care and Assisted Living Act of British
+Columbia, as amended or replaced from time to time, on a not for profit basis, for “group
+child care”, “preschool”, multi-age child care in accordance with Child Care Licensing
+Regulation B.C. Reg. No. 332/2007, as amended or replaced from time to time, and may
+include the use of flexible space operated for child services as determined by the
+Director of Social Planning for the city but excludes premises operated for “family child
+care”;
+"Community Centre /Neighbourhood House" means a community centre /neighbourhood
+house generally accessible to the public and no smaller than 50 square meters in floor
+area;
+"development" means any construction, alteration, or extension of all or part of a building
+or structure that requires issuance of a building permit, and includes a surface parking
+lot but excludes repair or renovation work, being repair or renovation of a building or
+structure that does not increase the floor area of that building or structure;
+“FSR” means floor space ratio as that term is defined in the Zoning and Development
+By-law.
+"floor area" means the floor area of a development set out in the development permit
+that applies at the time of entitlement to delivery of the building permit authorizing the
+development;
+"for-profit affordable rental housing" means a new building containing multiple dwelling
+units, which meets the requirements of section 3.1A to be for-profit affordable rental
+housing, but does not include alterations of or extensions to those dwelling units;
+"general area" means all land within the boundaries of the city as described in Schedule
+A Part 1, except for those areas of land described in Schedule A Parts 2 and 3;
+"industrial zone" means:
+(a) any zoning district designated as “Industrial” by section 9.1 of the Zoning and
+Development By-law, and includes the following zones: I-2, M-1, M-1A, M-1B, M-
+2, MC-1, MC-2 zoning districts; and
+(b) the land zoned by CD-1 By-law No. 6654 with respect only to those uses that the
+by-law permitted on the date of its enactment;
+"laneway house" has the meaning ascribed to it by section 2 of the Zoning and
+2Development By-law;
+"levy" means development cost levy;
+"library" means a library generally accessible to the public and no smaller than 50
+square meters in floor space;”
+"mixed-employment (light industrial)" means the following zones: (IC-1, IC-2, IC-3, I-1, I-
+3, I-4, I-1A, I-1B zoning districts);
+"parking garage" means all or a portion of a building or structure the principal or intended
+principal use of which is the parking or storage of motor vehicles but excludes all or a
+portion of a building or structure that provides no more than four motor vehicle parking or
+storage spaces accessory to a residential use;
+"prime rate" means the floating annual percentage rate of interest established from time
+to time by the Bank of Montreal, 595 Burrard Street, Vancouver, British Columbia as the
+base rate that the Bank uses to determine rates of interest charged by it for Canadian
+dollar loans to customers in Canada and designated by the Bank of Montreal as the
+prime rate;
+"project" means any capital project described in section 2.2 and Schedule C;
+"Public Authority Use" means a Public Authority use limited to Police Station or Fire Hall;
+"replacement housing" has the meaning given to it in section 523D(2.2) of the
+Vancouver Charter;
+"school" means an institution of learning regularly giving instruction to children that is
+either:
+(a) under the jurisdiction of The Board of School Trustees of School District No. 39
+(Vancouver) constituted under the School Act, or
+(b) accepted by the Ministry of Education of the Province of British Columbia, or its
+successor in function, as providing instruction equivalent to that furnished in the
+schools referred to in subparagraph (a) above;
+"social housing", for the purposes of section 523D(10)(d) of the Vancouver Charter,
+means rental housing:
+(a) in which at least 30% of the dwelling units are occupied by households with
+incomes below housing income limits, as set out in the current “Housing Income
+Limits” table published by the British Columbia Housing Management
+Commission, or equivalent publication;
+(b) which is owned by a non-profit corporation, by a non-profit co-operative
+association, or by or on behalf of the city, the Province of British Columbia, or
+Canada; and
+3(c) in respect of which the registered owner or ground lessee of the freehold or
+leasehold title to the land on which the housing is situate has granted to the city a
+section 219 covenant, housing agreement, or other security for the housing
+commitments required by the city, registered against the freehold or leasehold
+title, with such priority of registration as the city may require;
+except that in the HA-2 district; in the area of the FC-1 district located north of National
+Avenue; in the area of the M-1, I-2, RT-3 and RM-3A districts located north of Venables
+Street, Malkin Avenue and Prior Street, south of Hastings Street, east of Gore Avenue
+and west of Clark Drive; in the Downtown-Eastside Oppenheimer district; and in the area
+of the Downtown district denoted as C2 on Map 1 of the Downtown Official Development
+Plan; social housing means rental housing:
+(d) in which at least one third of the dwelling units are occupied by persons eligible
+for either Income Assistance or a combination of basic Old Age Security pension
+and Guaranteed Income Supplement and are rented at rates no higher than the
+shelter component of Income Assistance;
+(e) which is owned by a non-profit corporation, by a non-profit co-operative
+association, or by or on behalf of the city, the Province of British Columbia, or
+Canada; and
+(f) in respect of which the registered owner or ground lessee of the freehold or
+leasehold title to the land on which the housing is situate has granted to the city a
+section 219 covenant, housing agreement, or other security for the housing
+commitments required by the city, registered against the freehold or leasehold
+title, with such priority of registration as the city may require.
+"surface parking lot" means a parking lot established on the surface of land that has no
+portion of a building or structure above or below it; and
+"temporary building" means a temporary building, structure, or shelter for which a
+building permit is necessary under the Building By-law.
+Table of contents
+1.3 The table of contents for this By-law is for convenient reference only, and is not for
+assistance in interpreting or enforcing this By-law.
+Schedules
+1.4 The schedules attached to this By-law form part of this By-law.
+Severability
+1.5 A decision by a court that any part of this By-law is illegal, void, or unenforceable severs
+that part from this By-law and is not to affect the balance of this By-law.
+4SECTION 2
+LEVY AREA
+Levy area
+2.1 Council designates that the general area is subject to imposition of a levy under this By-
+law.
+2.2 Development cost levies are imposed under this by-law for the purpose of providing
+funds to assist the City in paying the capital cost of providing, constructing, altering, or
+expanding sewage, water, drainage facilities.
+SECTION 3
+DEVELOPMENT COST LEVIES
+Imposition of levies
+3.1 Subject to this By-law, Council imposes, on every person entitled to delivery of a building
+permit authorizing development in the general area, the levies set out in Schedule C.
+Waiver for for-profit-affordable housing
+3.2 Notwithstanding section 3.1, Council waives the levy otherwise required under Schedule
+C for construction of for-profit affordable rental housing in accordance with sections 3.1A and
+3.1B of the Vancouver Development Cost Levy By-law No. 9755.
+General levy
+3.3 Schedule C sets out the levies imposed under this By-law, and is based on floor area.
+Application of levy to less than four dwelling units
+3.4 A levy is payable where a building permit authorizes the construction, alteration, or
+extension of a building that, after the construction, alteration, or extension, will:
+(a) contain less than four self-contained dwelling units;
+(b) be put to no other use other than residential use in those dwelling units; and
+(c) in the case of an alteration or extension, except for the alteration or extension of
+a garage into a laneway house, include an addition of 46.5 m² or more of floor
+area.
+Alteration or extension of existing building or structure
+3.5 If a development consists only of the alteration or extension of an existing building or
+structure to increase its floor area, except for the alteration or extension of a garage into a
+laneway house, the levy applies only to the additional floor area.
+5Staged development
+3.6 If a development takes place in stages authorized by separate building permits, a levy is
+payable, under section 3.3 with respect to each such building permit.
+Aggregate levy
+3.7 If a development includes uses, or buildings or structures, to which different levies apply,
+the levy for the development is to be the aggregate of them.
+Payment of levy by installments
+3.8 Rather than paying a levy upon issuance of a building permit, the person responsible for
+payment of the levy, at the time and as a condition of issuance of the building permit, may:
+(a) pay $100.00 to the city; and
+(b) post with the city an irrevocable and unconditional letter of credit for the balance
+of the amount of the levy, together with an amount equal to one year’s interest
+thereon at a rate that is two percent above the prime rate on the day of
+application for the building permit, for a term of not less than 12 months.
+Realization on security
+3.9 The city may realize on the letter of credit referred to in section 3.8, or on any renewal of
+it:
+(a) within 30 days before the date of its expiry unless, before the date 11 months
+following the date of its issuance, the person who posted the letter of credit or its
+renewal posts with the city a renewal or further renewal of the letter of credit on
+the same terms and conditions as the original letter of credit except that fixing of
+the prime rate is to occur on the day of renewal or further renewal of the letter of
+credit; or
+(b) if the levy that it secures remains unpaid on the date of issuance of the
+occupancy permit permitting occupancy of the development in respect of which
+the levy is payable.
+Default in payment of levy installments
+3.10 If a levy payable by installments under section 3.8 of this By-law or any portion of it
+remains unpaid after its due date, Council authorizes the Collector of Taxes to insert the amount
+of the levy, or unpaid portion, in the real property tax roll as a charge imposed with respect to
+the parcel or parcels in relation to which the city issued the building permit.
+6Change in use of excluded floor area
+3.11 If the conversion of space that is not floor area to a use that makes it floor area occurs
+Council deems such space to be floor area as at the date of issuance of the building permit
+authorizing its development.
+Change in use of excluded land or development
+3.12 If the development or change of use of land or a building or structure, that is exempt
+from a levy, makes it subject to a levy, such levy is due and payable at the time of such
+development, alteration, or change of use.
+SECTION 4
+ENACTMENT
+Force and effect
+4.1 This By-law is to come into force and take effect on the date of its enactment.
+ENACTED by Council this 24th day of July, 2018
+Signed “Gregor Robertson”
+Mayor
+Signed “Katrina Leckovic”
+City ClerkSCHEDULE “A” - PART 1SCHEDULE A - PART 2
+Those areas of land listed in Column 1, and designated or described,
+as at January 28, 2000, in the by-laws listed in Column 2
+Column 1 Column 2
+Lands zoned CD (Comprehensive Development District) and By-law No. 6650
+subject to the False Creek North Official Development PlanSCHEDULE A - PART 3
+PID 024-041-238
+Lot B
+PID 024-041-246
+Lot C
+PID 024-041-254
+Lot D
+Public Harbour of Burrard Inlet
+New Westminster District
+Plan LMP36518SCHEDULE “C”
+Schedule C - City-wide Utilities Development Cost Levy Rates
+Total Rate Effective
+Unit/
+Category/Use Development September 30,
+area cost
+Cost Levy 2018
+RESIDENTIAL
+Residential at or below 1.2 FSR
+$ 24.97 Per m2 $ 24.97
+and Laneway House
+Medium Density Residential
+$ 54.25 Per m2 $ 54.25
+Above 1.2 to 1.5 FSR
+Higher Density Residential
+Per m2 $ 108.61
+Above 1.5 FSR (West Area)
+$ 108.61
+Higher Density Residential
+Per m2 $ 54.30
+Above 1.5 FSR (East Area)*
+NON-RESIDENTIAL
+Industrial
+(I-2, M-1, M-1A, M-1B, M-2, MC- $ 21.74 Per m2 $ 21.74
+1, MC-2 Zoning Districts)
+Mixed Employment (Light
+Industrial)
+$ 40.69 Per m2 $ 40.69
+(IC-1, IC-2, IC-3, I-1, I-3, I-4, I-1A,
+I-1B Zoning Districts)
+Commercial & Other $ 54.25 Per m2 $ 54.25* 50% of levy in 2018 applied to East Area. Rate to be implemented in full by
+September 30, 2020. East Area and West Area determined by Appendix A.
+Unit/
+Category/Use Rate
+Area cost
+CULTURAL, INSTITUTIONAL, SOCIAL
+School use Per m2
+$5.49
+Parking Garage Per m2
+$1.08
+Childcare Use
+$10.00
+Temporary Building
+$10.00
+Community Energy Centre
+$10.00
+Artist Studio Class A & Class B
+$10.00 Per Building
+Community Centre/Neighbourhood P e r m i t
+House $10.00
+Library
+$10.00
+Public Authority Use
+$10.00
+Social Service Centre
+$10.00Appendix A
+Vancouver Map - East and West Areas

@@ -1,0 +1,789 @@
+Report Date: April 22, 2026
+VanRIMS No.: 08-3000-30
+Submit comments to the Board
+TO: Park Board Chair and Commissioners
+FROM: Director, Park Operations
+SUBJECT: Tree Inspection Policy
+RECOMMENDATIONS
+THAT the Board receives this report and adopts the new Tree Inspection Policy as
+outlined in this report and attached as Appendix D.
+PURPOSE AND SUMMARY
+This report provides rationale and seeks support to approve a new Tree Inspection Policy as
+discussed herein with a summary of key changes from the current policy that was previously
+approved in 1993.
+BOARD AUTHORITY / PREVIOUS DECISIONS
+The Park Board adopted the current Tree Inspection Policy on June 7, 1993 (“1993 Policy”) – see
+Appendices.
+More recently, the Park Board adopted the Urban Forest Strategy – 2025 on May 12, 2025. Goal
+#1 of five goals defined in the Urban Forest Strategy is focused on health and safety and includes
+actions such as updating the Tree Inspection Policy (1993):
+- Goal #1: Manage trees for health and safety;
+- Goal #2: Protect the urban forest;
+- Goal #3: Engage residents in the urban forest;
+- Goal #4: Monitor the status and condition of the urban forest; and
+- Goal #5: Expand the urban forest
+Other related background includes:
+- Street Tree By-Law No. 5985 (grants responsibility for boulevard trees to the Park
+Board); and
+- Protection of Trees By-Law No. 9958.
+PURPOSE AND EXECUTIVE SUMMARY
+This report seeks Park Board approval of a new Tree Inspection Policy to replace the current
+policy adopted in 1993. The updated policy modernizes and consolidates how the City manages
+tree risk on public lands, aligns with contemporary arboricultural best practices, and advances
+Goal #1 (Manage trees for health and safety) of the Park Board and Council–approved Urban
+Forest Strategy – 2025.
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 2
+The proposed policy establishes a single, citywide framework for tree inspection and risk
+mitigation, administered by Urban Forestry as the subject-matter expert for all City-owned trees.
+It expands the policy’s scope beyond street and park trees to include civic lands, laneways,
+forested areas, shared trees, and inaccessible trees—addressing long-standing gaps and
+inconsistencies across departments.
+Key updates include replacing dated inspection terminology with the International Society of
+Arboriculture’s Tree Risk Assessment Qualification (TRAQ) methodology; introducing clear,
+quantitative timelines for mitigating identified risks; and shifting from prescriptive pruning cycles
+to risk-based inspection and response standards. For most stand-alone trees, the policy adopts
+a 10‑year detailed inspection cycle supplemented by annual visual inspections, balancing public
+safety, operational feasibility, and responsible use of public funds.
+The new policy does not request new funding and is designed to be implemented through a
+phased transition beginning January 1, 2027, supported by ongoing tree inventories, asset
+management system enhancements, and staff training. Overall, adoption of the proposed Tree
+Inspection Policy provides a consistent, defensible, and achievable approach to managing tree-
+related risk across the City while supporting the long-term health and sustainability of Vancouver’s
+urban forest.
+CONTEXT AND BACKGROUND
+Tree Inventory
+Vancouver’s urban forest consists of all trees on public and private land across the 115 km² of
+land within the City of Vancouver. The City currently has approximately 25% canopy cover. Per
+the existing 1993 Policy, the Park Board’s Urban Forestry Department (“Urban Forestry”) is
+responsible for stewardship and risk management of street and park trees, including street trees,
+park / golf course trees, and parkland forest areas.
+The proposed policy would also incorporate trees on other City-owned lands (referred to as “Civic”
+and “Lane” trees below), representing approximately 1.25% of the city’s canopy cover. Figure 1
+illustrates the distribution of canopy cover by land ownership.
+Figure 1: City of Vancouver urban forest canopy cover by land-type and ownership. Trees on private
+property and school property are the responsibility of others
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 3
+Although all public trees are owned by the City of Vancouver, responsibility for managing them is
+currently distributed across several internal departments, each with its own operational protocols
+and risk‑management practices. These can be grouped into the following categories, using the
+same terminology used in the new proposed Policy:
+- Street Trees (150,000) – individual trees located in boulevards on City streets
+- Currently managed by Park Board;
+- Park Trees (38,000) – individual trees located in Parks
+- Currently managed by Park Board;
+- Civic Trees (approximately 5000 trees) – individual trees located in City property that is
+not streets or parks (examples: City Hall Campus; Mountain View Cemetery)
+- Currently managed by Real Estate, Environment, and Facilities Management (REFM) and
+Arts, Culture and Community Services (ACCS); not covered by current 1993 Policy;
+- Lane Trees (approximately 2000 trees) – individual trees located in constructed or
+unconstructed lane right of way
+- Currently managed by Engineering; not covered by current 1993 Policy
+- Forest Area Trees (approx. 1-Million) – trees located in densely-forested areas of parks,
+street right of way or other City property
+- Currently managed by the “owner” department; not covered by current 1993 Policy
+- Shared Trees – trees that fall into any of the above categories, where the trunk grows
+across the City property line
+- Not covered by current 1993 Policy;
+- Inaccessible Trees – trees that fall into any of the above categories, but where its location
+has been enclosed or occupied by neighbouring occupants
+- Not covered by current 1993 Policy
+Current Status and the 1993 Policy
+Staff have identified substantial areas for improvement and change from the current status under
+the 1993 Policy. In summary:
+Scope/completeness: The 1993 Policy only applies to Street Trees and Park Trees under the
+care, custody and control of the Park Board.
+The new Policy establishes a city-wide, one-budget, consolidated approach to tree risk
+management, assigning Urban Forestry as the subject-matter expert and implementation
+authority for all City lands.
+Clarity and Service Level: The 1993 Policy requires that all Street Trees must be pruned and
+undergo a detailed inspection once every seven years, and also undergo an annual visual
+inspection. The combined requirement to prune and inspect, rather than to inspect first and
+undertake risk-based mitigation as needed is problematic, as it prescribes a fixed volume of
+mitigation work regardless of the findings of an individual inspection.
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 4
+In addition, staff have encountered challenges achieving this service level, while also meeting
+other operational requirements. It equates to an obligation to prune over 21,000 street trees
+annually, while also attempting to address park and golf course trees, storm-related tree work,
+service requests, emerging priorities and conventional stewardship practices such as tree planting
+and watering. In recent years, challenges encountered by Urban Forestry have included climate
+change impacts, an expanding asset base, development-related impacts such as new and
+replacement underground infrastructure, and constrained resources. To illustrate, Urban Forestry
+responded to 920 storm-related tree failures in 2025, accounting for approximately 20% of Urban
+Forestry’s operational work-flow, and in recent years has responded to over 10,000 service
+requests annually – a reflection on an increasingly engaged community. As a result, some trees
+have not been inspected and/or pruned every 7 years as required by the 1993 Policy.
+Key Changes Under the New Policy
+The new Policy introduces five key changes:
+1) Complete Scope for Individual Trees: the new Policy expands the categories of
+individually managed trees beyond Street Trees and Park Trees to include Civic Trees and
+Lane Trees.
+- Street Trees, Park Trees and Civic Trees will undergo a detailed inspection every
+10 years (not 7), and continue to undergo a visual inspection every year as
+currently provided under the 1993 Policy; and
+- Lane Trees will be inspected on a reactive basis as described further below.
+2) Complete Scope for Forest Area Trees: the new Policy would introduce Forest Area
+Trees as a new category, to be proactively inspected via a visual inspection from adjacent
+roadways and all sanctioned pathways every 3 years;
+3) Replace dated risk assessment terminology and methodology with the International
+Society of Arboriculture’s Tree Risk Assessment Qualification (“TRAQ”), which sets out
+defined inspection/assessment methods, a defined qualification for conducting such
+inspections, and defined levels of risk based on the likelihood and consequences of tree
+failure.
+4) Update the timeframes for completion of risk mitigation work from qualitative
+language in the 1993 Policy (i.e. “prioritized”, “as soon as practical”) with clear, quantitative
+timeframes based on the identified TRAQ risk category (i.e. within 5 business days).
+5) Introduce standard response processes for Shared Trees and Inaccessible Trees.
+The chart below summarizes the updates to the policy:
+Tree Inspection Policy Tree Inspection Policy
+(1993) (2026)
+Parks Included Included
+Golf Courses Included Included
+Streets Included Included
+Forest Areas Included Included
+Engineering (Laneways, ROWs) Not Included Included
+REFM Lands (Civic Lands) Not Included Included
+Mountain View Cemetery (Civic Lands) Not Included Included
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 5
+Dated Terminology (ISA
+Updated Terminology (ISA
+Tree Hazard Evaluation
+TRAQ Methods)
+Tree Risk Methods Form)
+Qualitative (i.e. 'prioritized', Quantitative (i.e. 5 business
+Response Times 'as soon as practical') days, 30 days, etc.)
+Rationale for the New Policy
+The new Policy addresses the scope and service-level limitations of the 1993 Policy by
+establishing a single, city-wide framework administered by Urban Forestry.
+The move towards standardized inspections, as opposed to dictating the volume of work that
+must occur (i.e. “pruning” every 7 years) is a more appropriate commitment of staff resources.
+The introduction of quantitative risk mitigation deadlines for each risk profile sets a clear level of
+service which is beneficial to staff and the public; in contrast, the 1993 Policy uses qualitative
+language (i.e. “prioritized”, “as soon as practical”).
+For Street Trees and other categories of proactively-managed individual trees, the change for
+detailed inspection frequency from 7 years to 10 years is intended to balance effective risk
+management with responsible use of public funds, while also setting a clear level of service that
+can be achieved while delivering on other commitments as described above.
+The adoption of TRAQ represents the contemporary risk assessment method that evolved from
+its precursor program referred to as Tree Risk Assessment Course and Exam (TRACE). In
+summary, TRAQ categorizes inspections/assessments into three defined levels and methods of
+inspection, and four defined risk categories (Low; Moderate; High; Extreme) based on the
+likelihood, and consequences, of tree failure in that tree’s location. A summary of the inspection
+levels is set out below. For further detail, please see the attached Appendix B.
+- Level 1 (visual inspection, conducted from a particular vantage point (i.e. walking a
+pathway or driving a road), often used for expansive populations;
+- Level 2 (basic assessment, a 360-degree ground-based inspection often using simple
+tools for individual trees);
+- Level 3 (advanced assessment, sometimes using invasive testing methods, reserved for
+unique circumstances/high-value specimens)
+Appendix B contains more details on TRAQ as well as a detailed summary of changes to the 1993
+policy and ‘Tree Inspection Requirements by Land Type’.
+The new categorization and management of Forest Area trees, Lane Trees, Shared Trees and
+Inaccessible Trees improve on existing practices, which currently are mainly reactive and ad hoc
+in nature. In summary:
+- Areas containing Forest Area Trees will be inspected via Level 1 visual assessment once
+every three years conducted from adjacent roadways and sanctioned pathways;
+- Lane Trees will initially be inspected on a reactive basis (i.e. in response to complaints);
+individual trees identified by complaint and inspected will then be subject to a Level 2
+inspection once every 10 years;
+- Shared Trees that are verified to be 50% or more located on City property will remain
+inspected as otherwise provided by the Policy, and Shared Trees that are less than 50%
+located on City property will be downgraded to reactive inspection only; and
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 6
+- Inaccessible Trees will be inspected and responded to on a reactive basis only, and only
+where conditions for required access and worksite safety are provided by the adjacent
+owner.
+A more detailed discussion of these categories and the rationale for the recommended service
+level under the new Policy is attached as Appendix A.
+DISCUSSION
+Steps Towards Implementation: Successful implementation of the new policy will be dependent
+on the following:
+- Inventory: Complete an inventory of outstanding tree and forest asset classes;
+- Software Upgrades: Upgrade UFO asset management software to allow task
+prioritization;
+- Tree Risk Assessment: Update risk assessment process and response times; and
+- Blended Services: Integrate blended services for enhanced service levels.
+Details on these aspects of implementation can be examined in detail within Appendix B.
+TRANSITION
+In General
+The new Policy would take effect January 1, 2027, consistent with Urban Forestry’s calendar-year
+operational planning, and allowing time for inventorying, training, and software upgrades.
+10 Year Inspection Cycle
+The new policy will change the current detailed inspection commitment from every 7-years for
+some individually inventoried trees (i.e. Street Trees), to every 10-years, for all stand-alone trees
+(i.e. not forest areas, and not laneways).
+Effectively, this would increase the pre-existing inspection interval for Street Trees, define a time-
+frame for Park Trees, and impose a new proactive inspection regime on a “new” category of stand-
+alone trees (Civic Trees), which to date have mainly been inspected on a reactive basis only.
+Inventorying of the “new” Civic trees category is expected to be completed Q1 2027.
+Staff recommend that the new policy expressly “reset the clock” for all detailed Level 2
+inspections, including trees currently subject to the 7-year inspection interval. This would give the
+City 10-years from the effective date of the new policy in which to complete a detailed Level 2
+inspection of all stand-alone trees on a systematic, area / neighbourhood basis (see Appendix B).
+The practical implication is that some trees will go up to 10-years before they undergo a detailed
+Level 2 inspection, however these same trees will receive a Level 1 inspection annually to identify
+emerging issues on an ongoing basis. In addition, as discussed above under the heading “Current
+Status and the 1993 Policy”, some have not been pruned and inspected every 7 years where
+required under that policy.
+Staff have considered alternatives to the proposed area-based approach, including organizing
+detailed Level 2 inspections by last inspection date rather than by area, to leverage recent and
+ongoing one-time inventory work of some trees (Civic Trees: Q1 2027; and Park Trees: completed
+2023) as a “head-start” on detailed inspections for those categories. Ultimately, staff recommend
+the “resetting the clock”, area-based approach. Arranging inspections by neighbourhood area will
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 7
+reduce travel time and increase efficiencies. A “resetting the clock”, area approach is simple, is
+consistent with the overall integration achieved by the new policy and increases likelihood of
+successful implementation over time through inevitable staffing turn-over.
+In contrast, attempting to arrange an inspection regime based on a variety of past inspection dates
+for mixed asset categories in scattered geographic locations across the City of Vancouver would
+be complicated, comparatively inefficient and increase the risk of omissions leading to incomplete
+implementation and non-compliance. Staff estimate the increased cost from this approach to be
+at least double the annual costs of an area-based approach due to increased travel time,
+additional in-office planning and logistics, increased service requests due to establishment of
+unclear expectations and an increased likelihood of non-compliance leading to costly claims.
+FINANCIAL CONSIDERATIONS
+This report does not request new funding. However, as net new trees beyond those being
+inventoried in the short-term are added to Urban Forestry’s management inventory, any
+associated operating impacts will be considered through the City’s annual Operating budget
+process. As part of this process, estimated operating costs are reviewed and updated annually to
+reflect changes in inflation, material costs, and collective agreement provisions. Based on current
+lifecycle cost assumptions, the estimated annual operating costs for a ten-year inspection cycle
+are $54 per street tree, $44 per park tree, and $9 per tree in forested areas.
+RISK & LEGAL CONSIDERATIONS
+The adoption of the proposed new Policy is authorized by the Vancouver Charter and the Street
+Tree By-law No. 5895.
+CONCLUSION AND NEXT STEPS
+In the short-term, staff will advance the inventory of outstanding tree assets; upgrade the asset
+management software; update risk assessment processes and response; seek resourcing once
+the inventory is complete and continue the use of the blended services delivery model.
+Staff will continue providing progress updates on the ongoing work program.
+* * * * *
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 8
+APPENDIX A
+Lane Trees, Forest Area Trees, Shared Trees and Inaccessible Trees
+Lane Trees
+Context
+There are approximately 700 km of lanes in the City of Vancouver. Many of these are constructed
+and open for vehicular traffic, but some consist only of unconstructed right of way. In some cases,
+portions of the latter can be used and sometimes enclosed by neighbouring adjacent owners
+essentially as an extension to the owner’s backyard. In many cases, these trees will often present
+difficult questions of determining responsibility depending on where the actual property line lies
+(discussed further below under “Shared Trees”).
+In any case, these areas contain trees that were, to staff’s knowledge, never planted by the City
+or Park Board, and so either were the result of natural growth or planted by private owners.
+Historically, these were managed on a reactive and ad hoc basis only.
+In 2023, Engineering staff conducted a desktop exercise to quantify the approximate scale of
+Lane Trees. Based on a detailed review of Vanmap and Google Streetview data and imagery,
+staff identified approximately 1366 “open” Lane Trees, and 555 “landlocked” Lane Trees. These
+are order of magnitude estimates only, as the criteria for “landlocked” was based solely on number
+of adjacent land parcels to the tree, and only trees estimated to be 6 meters tall and/or 10
+centimeters in diameter were included.
+Recommended Approach and Rationale
+Lane Trees generally present a lower risk exposure than Street Trees or Park Trees due to
+comparatively lower pedestrian and vehicle volumes, and irregular use patterns. Given the lower
+risk profile, and that these trees were not planted by the City or Park Board, staff recommend that
+this category be inspected on a reactive basis only to start; any trees identified and inspected on
+that basis would then be added to the inventory of trees to be inspected on the same 10 year/Level
+2 proactive cycle as Street Trees.
+Staff do not recommend adding such Lane Trees to the 1 year/Level 1 visual inspection currently
+imposed on Street Trees. Adding individual Lane Trees on a spot basis to the current 1 year/Level
+1 “drive by” visual inspection commitment would not be feasible, as such inspections are by
+definition conducted on a bulk basis guided by fairly high-level instructions (i.e. street maps) in
+order to achieve the efficiency/cost savings intended by the Level 1 inspection method, rather
+than the granular data (GIS coordinates) used to call out particular trees for a Level 2 inspection
+cycle. Identifying a particular Lane Tree as part of a 1 year/Level 1 visual inspection would
+significantly increase the cost of that inspection cycle and render it non-cost effective.
+Finally, staff do not recommend that Lane Trees undergo an up-front full inventory process
+intended to be completed for Civic Trees. An up-front inventorying of Lane Trees would represent
+a significant additional cost given the scale of asset (700 km of lanes), access issues due to
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 9
+encroachments, existing separate maintenance commitments for some trees by BC Hydro or
+other parties, and in some cases the need for a land survey for a “final answer”. This cost would
+achieve limited additional value, given that the existing desktop exercise data provides an
+approximate scale sufficient for the City and Park Board to set an appropriate inspection and
+maintenance service level for these trees.
+Forest Area Trees
+The City includes many densely forested areas, mostly in parks (e.g. Stanley Park), but also in
+other areas historically or currently managed by REFM or Engineering (e.g. Champlain Heights).
+Staff believe that these forested areas of the City in parks and elsewhere would benefit from a
+proactive inspection regime targeting areas that are accessed and used by the public. The new
+Policy would require these areas to be inspected by a Level 1 visual assessment once every three
+years, such inspection to be conducted from all adjacent roadways (i.e. a “drive by” inspection)
+and adjacent or internal sanctioned pathways.
+“Sanctioned” is defined in the new Policy to mean pathways constructed or approved by the
+City/Park Board and included as official in the Park Board’s GIS database.
+Staff believe this would represent an appropriate service level balancing responsible use of City
+resources with maintaining an appropriate level of risk management, and not allowing unapproved
+footpaths in parks and elsewhere to increase the City’s scope of responsibility without notice to
+the City.
+Shared Trees
+Staff occasionally become aware of trees whose trunks are, or may be, located partly on City
+property and partly on adjacent non-City property. Where a tree’s trunk is located on both
+properties, that tree is co-owned by the City and the neighbouring property owner. To date, these
+situations have been responded to on an ad hoc basis.
+The new Policy introduces a new standard measurement and inspection/maintenance process
+for potential shared trees.
+The trunk will be measured as close to ground level as possible, but just above the “root flare”
+(i.e. where the visible roots of a tree may cause the tree base to swell or flare).
+For purposes of this policy, staff recommend against adopting other possible measurement
+methods, such as the “diameter at chest height” (1.4 m) method, as that method is typically used
+to determine size/significance rather than ownership, can yield arbitrary results for slanted or
+multiple-trunked trees, and over time will tend to increase City responsibility while decreasing
+adjacent owners’ responsibility, notwithstanding the fact that such trees were often originally
+planted by those owners or were formerly located solely on their property.
+Trees located 50% or more located on City property will remain inspected per their categorization
+under the Policy, trees located 49% or less on City property will be inspected on a reactive basis
+only, and trees that are not located on City property at all will not be inspected or maintained by
+staff going forward.
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 10
+For both proactively and reactively inspected shared trees, risks will be mitigated on the same
+timing as any other tree in the Policy, with the exception that the shortest timeframe (“Extreme
+Risk”) is extended from 5 business days to 10 business days, to provide staff with time to contact
+and potentially work with the co-owner regarding the required work before it occurs if feasible. In
+this way, the new Policy attempts to balance the City’s commitments to public safety, the interests
+and perspectives of co-owners of trees, and the responsible allocation of resources, including for
+situations in which the City is not the majority owner of the shared tree.
+Inaccessible Trees
+Staff occasionally become aware of trees that are hidden and/or enclosed by hedges, fences, or
+other encroachments installed by an adjacent owner, but are eventually verified to be located
+partly or wholly on City property. This has been most common in lanes, but has also occurred in
+other contexts. To date, these situations have been responded to on an ad hoc basis.
+The new Policy introduces a new standard response that attempts to balance the City’s
+responsibility for maintaining these assets and its responsibility to ensure staff and contractors
+are provided with a workplace that complies with work safety regulations. In summary, these
+inaccessible trees will only be inspected on a reactive basis, and only inspected and maintained
+where the adjacent owner provides the necessary access and safe workplace environment. Staff
+will take no steps to inspect or maintain when these requirements are not met.
+An alternative to this approach would be to create the necessary access by unilaterally removing
+the encroachments under the City’s Encroachment By-law. Staff do not recommend adopting this
+approach as it is high conflict and resource intensive in comparison to the above recommended
+approach.
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 11
+APPENDIX B
+Urban Forestry and Tree Inspection Requirements by Land Type
+Urban Forestry maintains in￼house staff who are appropriately trained to manage the urban forest
+- this includes Registered Professional Foresters, ISA Certified Arborists, Certified Utility Arborists,
+Tree Risk Assessors, Landscape Architects, and Integrated Pest Management specialists. Urban
+Forestry is currently working with Engineering Services, REFM, and ACCS to inventory tree
+assets on parcels not currently included under the 1993 Policy. These outstanding trees are
+incorporated into the updated policy and will be added to Urban Forestry’s asset inventory for
+ongoing management.
+Inventoried trees are accounted for in Urban Forestry’s new ESRI-based Urban Forest Operations
+(UFO) asset management software. The UFO geo-referenced database supports the work-flow
+for all tree stewardship operations throughout the lifecycle of city-owned trees, including:
+- Planting;
+- Watering;
+- Pruning;
+- Removal;
+- Stump Removal;
+- Re-Planting;
+- Storm Response;
+- Pest and Pathogen Response;
+- Development and Infrastructure-related Management; and
+- Service Requests.
+Proactive stewardship of the urban forest supports a resilient, healthy community and
+environment, while also managing the risks associated with trees. Trees may impact
+people, property and infrastructure with negative outcomes if they structurally fail or
+outgrow their environments.
+Priority tasks to ensure successful implementation of the new policy will require obtaining a
+complete inventory of applicable tree assets; upgrading the asset management software;
+updating risk assessment processes and response; and the deployment of contractors when
+necessary for compliance. Adopting the updated policy and management of additional tree assets
+into Urban Forestry’s operational procedures will take some time and the key next steps in the
+short-term are as follows:
+- Inventory: Complete an inventory of applicable tree and forest asset classes.
+- Street trees have been inventoried for decades and trees in parks and golf courses were
+inventoried in 2023.
+- An inventory is in-process for unaccounted trees on city-owned lands managed by:
+- REFM (e.g. Champlain Heights, City Hall, etc)
+- ENG (e.g. some R.O.W.s, not including accessible and inaccessible laneways); and
+- ACCS (e.g. Civic Lands such as the Mountain View Cemetery).
+- This inventory work is being led by Urban Forestry and is expected to be completed in Q1
+2027.
+- Trees will be defined as ‘stand-alone’ trees or ‘forest area’ trees.
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 12
+- Stand-Alone trees are spatially distinct when viewed from an aerial image and don’t form
+an indistinct cohort with adjacent trees – they will be defined as a GIS ‘point’. These will
+be inventoried and managed on an individual basis.
+- Forest Area trees are composed of aggregations of trees and defined as a ‘polygon’.
+Unaccounted forest areas, beyond previously inventoried polygons identified in parks and
+golf courses, will be mapped and followed-up with on-the-ground inspections to identify
+potential hazard trees adjacent to roadways and formal paths – these will be inspected
+proactively with a Level 1 inspection to identify risk levels and follow-up timelines.
+- Lane Trees are not being pursued in the current inventory for the following reasons:
+- Significant cost with limited added value for the approximately 700 km of laneways
+and <2000 trees;
+- Challenging access due to encroaching fences and structures;
+- The City and Park Board has not historically planted trees in laneways;
+- Many trees are already maintained by BC Hydro and other parties;
+- They will be addressed on a reactive basis through notifications from service
+requests, but may be inventoried and managed proactively following receipt of
+service requests that flag issues of concern; and
+- Each inventoried tree may require a land survey to confirm ownership.
+- Potential Shared Trees will be addressed on a reactive basis through notifications from
+service requests. These trees may be inventoried and managed proactively following
+receipt of service requests that flag issues of concern in accordance with the new Policy.
+- Software Upgrades: Upgrade UFO (Urban Forest Operations) asset management
+software to allow task prioritization.
+- GIS professionals on the Urban Forestry team will support software sustainment, data
+management, task optimization, work-flow and metrics dashboards and ongoing risk
+prioritization. A priority task is the development of a ‘time-stamp’ function to inform when
+assets are identified to be of risk. This will support compliance to mitigate risks within the
+timeframes stated in the new Tree Inspection Policy. It is estimated that the ‘time-stamp’
+function will be developed and integrated by Q1-2027.
+- Tree Risk Assessment: Update risk assessment process and response times.
+- The updated policy will incorporate risk assessment methods as defined by the
+International Society of Arboriculture (ISA) Tree Risk Assessment Qualification (TRAQ)
+manual (currently the ‘Third Edition – 2025’). The TRAQ framework categorizes
+assessments into three distinct levels, these allow arborists to choose the method best-
+suited to the inventory size, available timelines and available budgets. The three
+assessment levels are as follows:
+- Level 1: Limited Visual Assessment
+- Goal: To identify trees with an "imminent" or "probable" likelihood of failure that require
+mitigation or a more detailed Level 2 assessment. This is the most basic and rapid form
+of assessment, often used for large populations of trees (e.g. city-wide inventories, golf
+courses, parks, forest areas, etc.).
+- Method: A "walk-through" or "drive-by" survey is used and the arborist looks for obvious
+defects from a specified distance or perspective (e.g. only from the street or from a trail).
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 13
+- Limitation: Because it is limited to one visual perspective and often conducted relatively
+quickly, subtle or hidden physiological defects may be missed.
+- Level 2: Basic Assessment
+- Goal: To identify and evaluate specific defects and determine a risk rating based on the
+likelihood of failure and the potential impact on a target (e.g. a house, person, or
+infrastructure). This is the standard assessment for individual trees and much more
+comprehensive than Level 1.
+- Method: A 360-degree ground-based visual inspection of the tree. The arborist examines
+the crown, trunk, and root flare. It will often involve simple tools such as a mallet (for
+"sounding" the trunk to find hollows), a probe (for checking cracks or soft wood), and
+binoculars.
+- Level 3: Advanced Assessment
+- Goal: To provide quantifiable data on internal conditions that are not visible from Level 1
+or 2 inspection methods - a Level 3 assessment may be performed if timelines and
+budgets allow.
+- Method: This method is reserved for unique and occasional circumstances (i.e. high-value
+specimen trees) and utilizes specialized diagnostic equipment and techniques such as:
+- Resistance Drilling: Measuring wood density to identify decay.
+- Sonic Tomography: Using sound waves to map the trunk's interior.
+- Aerial Inspection: Ascending the tree to inspect the upper crown.
+- Root Excavation: Using an air spade or hand shovel for non-destructive inspection of tree
+roots and root health.
+- Under the existing policy, staff undertake a Level 1 – Limited Visual Assessment for all
+street trees on an annual basis. Under the new policy, staff will undertake an annual Level
+2 – Basic Assessment of 1/10th of the street, park and new stand-alone tree inventory. This
+will be undertaken on an area-basis with 2-3 neighbourhoods being assessed annually
+(see Figure A1). As is currently the practice, Level 1 – Limited Visual Assessments will
+continue being conducted annually on the street and park trees and expanded to other
+categories of trees outlined in the policy to identify emerging risks.
+- The response times for each risk class are as follows:
+- Extreme Risk – mitigate risks within 5 business days (10 for shared trees)
+- High Risk – mitigate risks within 90 days
+- Moderate Risk – re-inspect and/or mitigate risks within 1 year
+- Low Risk – within 10 years if necessary
+Park Board Meeting: May 4, 2026Tree Inspection Policy Page 14
+Figure A1: Level 2 – Basic assessment schedule noting that it will take 10-years to
+complete the first round of Level 2 assessments on the entire inventory.
+- Blended Services: Integrate blended services for enhanced service levels.
+- To protect public safety and ensure the continued delivery of essential services, Urban
+Forestry employs a blended service delivery model. While in-house professionals provide
+core services, staff vacancies and short or long-term absences may limit available
+capacity. As high-risk work cannot be deferred and established service timelines must be
+met, operating funds may be used, when necessary, to engage external contractors. This
+approach is widely recognized as a best practice across Canadian municipalities and used
+by peer jurisdictions, that combines in-house professional expertise with the strategic
+engagement of qualified external contractors when required.
+Park Board Meeting: May 4, 2026Appendix B - Tree Inspection Requirements by Land
+Type
+Definition Inspection Method Counts Risk Exposure
+Land Type Location/Context Type Accessible Ownership Current Future Inventory # of Assets Level Rationale
+Frequency Type Frequency Type
+Park System Designated Park Tree Yes Civic Annual Level 1 Annual; 10-year Level 1; Level 2 Complete 38,000 High High levels of public use within park areas.
+Park System Designated Park Tree No Civic Reactive N/A Reactive Level 1; Level 2 None Unknown Low Limited number of trees in Parks that are inaccessible.
+Park System Designated Park Tree Yes Shared >50% Reactive Level 1; Level 2 10-year Level 2 As required Unknown Low Limited number of trees with uncertain or shared ownership.
+Park System Designated Park Tree Yes Shared <50% Reactive Level 1; Level 2 Reactive Level 1; Level 2 As required Unknown Low Limited number of trees with uncertain or shared ownership.
+Park System Designated Park Forest Yes Civic Annual Level 1 3-year Level 1 Complete 444 Hectares High High levels of public use within park areas.
+May interface with buildings or informal paths. Area-based inspection
+Park System Designated Park Forest No Civic Reactive N/A Reactive Level 1; Level 2 As required Unknown Low appropriate given moderate exposure.
+Engineering Street Right of Way Tree Yes Civic Annual Level 1 Annual; 10-year Level 1; Level 2 Complete 149,000 High High pedestrian and vehicle activity; exposure varies by site context.
+Engineering Street Right of Way Forest Yes Civic Annual Level 1 3-year Level 1 To be inventoried Unknown Moderate Low pedestrian and vehicle volumes with irregular use patterns.
+Engineering Laneway Tree Yes Civic Reactive Level 1; Level 2 10-year Level 2 As required Low Low pedestrian and vehicle volumes with irregular use patterns.
+1400 (estimated)
+Engineering Laneway Tree Yes Shared >50% Reactive Level 1; Level 2 10-year Level 2 As required Low Low pedestrian and vehicle volumes with irregular use patterns.
+Engineering Laneway Tree Yes Shared <50% Reactive Level 1; Level 2 Reactive Level 1; Level 2 As required Low Low vehicle and pedestrain volume. Irregular Use patterns.
+Engineering Laneway Tree No Shared Reactive Level 1; Level 2 Reactive Level 1; Level 2 None Low Limited number of trees with uncertain or shared ownership.
+550 (estimated)
+Engineering Laneway Tree No Civic Reactive Level 1; Level 2 Reactive Level 1; Level 2 None Low Limited number of trees with uncertain or shared ownership.
+Limited pedestrian exposure. Area-based forest conditions with informal use
+Engineering Laneway Forest Yes Civic Reactive N/A 3-year Level 1 To be inventoried Unknown Low patterns.
+Limited pedestrian exposure; area-based forest conditions with informal use
+Civic City Owned Property Tree Yes Civic Reactive N/A Annual; 10-year Level 1; Level 2 To be inventoried 5000 (estimated) Moderate patterns.
+May interface with buildings or informal paths. Area-based inspection
+Civic City Owned Property Forest Yes Civic Reactive N/A 3-year Level 1 To be inventoried Unknown Moderate appropriate given moderate exposure.
+Civic City Owned Property Tree Yes Shared >50% Reactive N/A 10-year Level 2 As required Unknown Low Limited number of trees with uncertain or shared ownership.
+Civic City Owned Property Tree Yes Shared <50% Reactive N/A Reactive Level 1; Level 2 As required Unknown Low Limited number of trees with uncertain or shared ownership.
+Limited or no public access. Low exposure due to restricted use and reduced
+Civic City Owned Property Tree No Civic Reactive N/A Reactive Level 1; Level 2 None Unknown Low likelihood of public interaction. Limited number of "nusiance properties".
+Minimal public access and low use. Forested conditions further reduce
+Civic City Owned Property Forest No Civic Reactive N/A Reactive Level 1; Level 2 To be inventoried Unknown Low likelihood of interaction and consequence of failure.APPENDIX C
+Park Board Meeting: May 4, 2026APPENDIX C
+Park Board Meeting: May 4, 2026APPENDIX D
+Tree Inspection Policy
+Effective Date: _____________
+Generally
+1. The City of Vancouver (“City”) and the Vancouver Board of Parks and Recreation
+(“Park Board”) collectively maintain over one million trees throughout the city.
+2. This policy categorizes these trees, establishes inspection frequencies and methods
+for each category, and sets out requirements for responding to identified hazards in
+order to provide a reasonable and consistent level of service to the public.
+3. Tree maintenance operations within the context of tree risk management include, but
+are not limited to, tree risk inspections, pruning, tree removal, and stump removal.
+4. This policy has been developed to guide tree maintenance operations in a manner
+that reflects prudent planning, prioritization, and the effective allocation of available
+resources. In doing so, it considers multiple operational factors, including staffing and
+equipment capacity, tree location and classification, terrain, pedestrian, cyclist, and
+vehicular traffic volumes, historical and current weather conditions, and practices of
+comparable municipal government entities.
+5. Recognizing that the complete elimination of all tree‑related risk or the achievement
+of perfect conditions is not reasonably attainable across an inventory of more than
+one million trees, this policy establishes a rational framework that balances public
+safety objectives with appropriate timelines and operational capacity.
+Scope
+6. This policy applies to all trees located on property owned by the City and/or located
+on “Park Lands”, as divided into the categories “Street Trees”, “Park Trees”, “
+“Civic Trees”, “Lane Trees”, and “Forest Area Trees”, all as defined in the below
+section “Terms Referenced in Policy”.
+7. Tree maintenance operations will not be undertaken for any trees other than as
+categorized and specified in this Policy.
+Terms Referenced in Policy
+A. Land Categories
+“Boulevard” means: the same meaning as defined in the City’s Street Tree By-Law
+5895 and Street and Traffic By-law No. 2849.
+“Civic Lands” means: titled property owned by the City that is not a street or Park
+Lands, and responsibility for which has not been allocated to a third party under a
+Park Board Meeting: May 4, 2026APPENDIX D
+contract (including but not limited to development management agreement, license or
+lease), statutory right of way, or other instrument or agreement, or by by-law.
+“Park Lands” means: (1) parks, as that term is defined in s. 488 of the Vancouver
+Charter, and (2) lands used as parks, and/or for the purpose of public recreation, and
+which are actively maintained and cared for by the Park Board.
+“Lane” means: the same meaning as defined in the City’s Street and Traffic By-law
+No. 2849, and for purposes of this Policy, includes constructed and unconstructed
+Lane right-of-way.
+B. Tree Categories
+“Civic Trees” means: trees located on Civic Lands and which are “stand-alone trees”
+and identified as points within the City of Vancouver Park Board’s asset inventory of
+tree and forest assets (UFO Database).
+“Lane Trees” means: trees located on a Lane that is readily accessible by City staff
+and the public, and which are “stand-alone trees” and are not Forest Area Trees as
+defined below in this Policy.
+“Park Trees” means: trees located on Park Lands and which are “stand-alone trees”
+and identified as points within the City of Vancouver Park Board’s asset inventory of
+tree and forest assets (UFO Database).
+“Street Trees” means: trees located in any boulevard of the City, as defined in the
+City’s Street Tree By-Law No. 5985. and which are “stand-alone trees” and identified
+as points within the Park Board’s asset inventory of tree and forest assets (UFO
+Database).
+“Forest Area Trees” means: trees located on densely forested areas of Civic Lands,
+Park Lands, Lanes, or other street right-of-way, and identified as polygons within the
+Park Board’s asset inventory of tree and forest assets (UFO database), and are not
+individually inventoried, inspected or maintained except as expressly provided in this
+Policy.
+“Inaccessible Tree” means: a Civic Tree, Lane Tree, Park Tree, Street Tree or
+Forest Area Tree located in an area that has been enclosed or occupied by
+neighbouring occupants, or are otherwise not readily accessible by City staff or the
+public.
+“Shared Tree” means: a Civic Tree, Lane Tree, Park Tree, Street Tree or Forest
+Area Tree with a trunk growing across one or more property lines, as determined by
+the section “Shared Trees” below in this Policy.
+C. Technical/Operational
+Park Board Meeting: May 4, 2026APPENDIX D
+“Business Day” means: any day which is not a Saturday, Sunday, Statutory Holiday,
+Easter Monday or Boxing Day.
+“ISA” means: International Society of Arboriculture.
+“Level 1 Inspection” means: a limited visual assessment as defined by the ISA Tree
+Risk Assessment Qualification (TRAQ) Framework.
+“Level 2 Inspection” means: a basic risk assessment as defined by the ISA Tree
+Risk Assessment Qualification (TRAQ) Framework.
+“TRAQ” means: the ISA’s Tree Risk Assessment Qualification.
+“UFO Database” means: the Urban Forest Operations geo-referenced asset
+management software.
+Street Trees
+8. Every Street Tree will undergo a Level 1 Inspection once a year.
+9. Every Street Tree will undergo a Level 2 Inspection once every ten years.
+10. ISA Certified Arborists with TRAQ endorsement will undertake all inspections.
+11. If a potential risk involving a Street Tree is reported to staff outside of a regular
+scheduled inspection, the tree will undergo a Level 1 or Level 2 Inspection as
+necessary and when available resources and priorities allow.
+12. Response times for completing tree maintenance operations required by the above
+proactive and reactive inspections are based on the below risk levels (as defined by
+TRAQ), level of risk, storm response, workdays and crew availability. Based on this,
+the following response time applies:
+Extreme Risk – mitigate risks within 5 business days
+High Risk – mitigate risks within 90 days
+Moderate – re-inspect and/or mitigate risks within 1 year
+Low – within 10 years if necessary
+Park Trees
+13. Every Park Tree will undergo a Level 1 Inspection once a year.
+14. Every Park Tree will undergo a Level 2 Inspection once every ten years.
+15. ISA Certified Arborists with TRAQ endorsement will undertake all inspections.
+Park Board Meeting: May 4, 2026APPENDIX D
+16. If a potential risk involving a Park Tree is reported to staff outside of a regular
+scheduled inspection, the tree will undergo a Level 1 or Level 2 Inspection as
+necessary and when available resources and priorities allow.
+17. Response times for completing tree maintenance operations required by the above
+proactive and reactive inspections are based on the below risk levels (as defined by
+TRAQ), storm response, workdays and crew availability. Based on this, the following
+response time applies:
+Extreme Risk – mitigate risks within 5 business days
+High Risk – mitigate risks within 90 days
+Moderate – re-inspect and/or mitigate risks within 1 year
+Low – within 10 years if necessary
+Lane Trees
+18. All Lane Trees will be inspected on a reactive basis only (i.e. when a potential risk
+involving a tree is reported to staff), except as expressly provided below in this Policy.
+19. Any such reactive inspection will be a Level 1 or Level 2 Inspection as necessary and
+when available resources and priorities allow.
+20. ISA Certified Arborists with TRAQ endorsement will undertake all inspections.
+21. Response times for completing tree maintenance operations required by the above
+inspections are based on the below risk levels (as defined by TRAQ), storm
+response, workdays and crew availability. Based on this, the following response time
+applies:
+Extreme Risk – mitigate risks within 5 business days
+High Risk – mitigate risks within 90 days
+Moderate – re-inspect and/or mitigate risks within 1 year
+Low – within 10 years if necessary
+22. Upon completion of a reactive inspection for a Lane Tree, that Lane Tree will be
+inventoried and identified as a point within the Park Board’s asset inventory of tree
+and forest assets (UFO Database), and will undergo a Level 2 Inspection once every
+10 years going forward.
+Civic Trees
+23. Every Civic Tree will undergo a Level 1 Inspection once a year.
+24. Every Civic Tree will undergo a Level 2 Inspection once every ten years.
+25. ISA Certified Arborists with TRAQ endorsement will undertake all inspections.
+26. If a potential risk involving a Civic Tree is reported to staff outside of a regular
+Park Board Meeting: May 4, 2026APPENDIX D
+scheduled inspection, the tree will undergo a Level 1 or Level 2 Inspection as
+necessary and when available resources and priorities allow.
+27. Response times for completing tree maintenance operations required by the above
+proactive and reactive inspections are based on the below risk levels (as defined by
+TRAQ), storm response, workdays and crew availability. Based on this, the following
+response time applies:
+Extreme Risk – mitigate risks within 5 business days
+High Risk – mitigate risks within 90 days
+Moderate – re-inspect and/or mitigate risks within 1 year
+Low – within 10 years if necessary
+Forest Area Trees
+28. Forest Area Trees will undergo a Level 1 Inspection once every three years as
+follows:
+a. Staff will conduct a “drive-by” Level 1 Inspection from a motor vehicle driving on
+constructed streets intended for motor vehicle traffic located adjacent to Forest
+Area Trees;
+b. Staff will conduct a “drive-by” Level 1 Inspection from a motor vehicle driving on
+constructed sanctioned pathways suitable and intended for motor vehicle traffic
+located within areas containing Forest Area Trees;
+c. Staff will conduct a “walk-by” Level 1 Inspection on foot on all sanctioned
+pathways/sidewalks etc. located within or adjacent to areas containing Forest
+Area Trees;
+29. For clarity, "sanctioned" means pathways denoted on the Park Board maintained GIS
+Layer "Pathway", and does not include pathways that exist without the prior formal
+approval and knowledge of the City and Park Board, and/or are designated as
+“unofficial”.
+30. ISA Certified Arborists with TRAQ endorsement will undertake all inspections.
+31. If a potential risk involving a Forest Area Tree is reported to staff outside of a regular
+scheduled inspection, the tree will undergo a Level 1 or Level 2 Inspection as
+necessary and when available resources and priorities allow.
+32. Response times for completing tree maintenance operations required by the above
+proactive and reactive inspections are based on the below risk levels (as defined by
+TRAQ), storm response, workdays and crew availability. Based on this, the following
+response time applies:
+Extreme Risk – mitigate risks within 5 business days
+High Risk – mitigate risks within 90 days
+Park Board Meeting: May 4, 2026APPENDIX D
+Moderate – re-inspect and/or mitigate risks within 1 year
+Low – within 10 years if necessary
+Inaccessible Trees
+33. All Inaccessible Trees will be inspected and maintained on a reactive basis only (i.e.
+when a potential risk involving a tree is reported to staff), and only when neighbouring
+occupants provide staff with all of the following:
+a. Sufficient and reasonable access for all required equipment;
+b. Sufficient and reasonable access allowing for the removal of the tree or parts of
+the tree as necessary; and
+c. A workplace that meets all applicable worksite safety laws and regulations,
+including the requirement for a workplace free of obstructions.
+34. If any of the access or safe workplace requirements are not provided to staff as
+provided above, the City will discontinue any tree inspection and/or maintenance
+operations with respect to the subject tree and will mail notifications of that fact to all
+neighbouring occupant(s).
+35. Any such reactive inspection will be a Level 1 or Level 2 Inspection as necessary.
+36. ISA Certified Arborists with TRAQ endorsement will undertake all inspections.
+37. Response times for completing tree maintenance operations required by the above
+inspections are based on the below risk levels (as defined by TRAQ), storm
+response, workdays, and crew availability. Based on this, the following response time
+applies:
+Extreme Risk – mitigate risks within 5 business days
+High Risk – mitigate risks within 90 days
+Moderate – re-inspect and/or mitigate risks within 1 year
+Low – within 10 years if necessary
+38. For clarity, the above response times begin running, and remain running, only when
+all access and safe worksite requirements are provided to staff as set out in the
+above paragraph 33.
+Shared Trees
+39. When staff become aware that any tree discussed in this Policy may be located partly
+on private property and partly on City property, staff will conduct, or cause to be
+conducted, a survey and measurement to verify the location of that tree, by
+determining the percentage of the tree trunk’s diameter (if any) that is located on the
+City’s side of the property line, such trunk diameter is to be measured as close to
+ground level as possible, but above the root flare.
+Park Board Meeting: May 4, 2026APPENDIX D
+40. If the tree is located 50% or more on the City's side of the property line, then that tree
+will remain inspected as otherwise provided in this Policy depending on that tree’s
+categorization in this Policy.
+41. If that tree is located less than 50% on the City's side of the property line, then that
+tree will be inspected on a reactive basis only, and the City will mail notification of
+that determination to all adjacent occupants.
+42. If that tree is located entirely on the private owner(s)’ property and not the City’s, then
+the City will discontinue any tree maintenance operations regarding that tree and will
+mail notifications of this change to all adjacent occupants.
+43. The above determination of location and responsibility is subject to any contract,
+statutory right of way, or other agreement or instrument determining the ownership of
+such tree.
+44. ISA Certified Arborists with TRAQ endorsement will undertake all inspections.
+45. Any reactive inspection of a Shared Tree will be a Level 1 or Level 2 Inspection as
+necessary.
+46. Response times for completing tree maintenance operations required by the above
+inspections for Shared Trees are based on the below risk levels (as defined by
+TRAQ), storm response, workdays, crew availability and access being provided by
+the neighbouring occupant(s). Based on this, the following response time applies:
+Extreme Risk – mitigate risks within 10 business days
+High Risk – mitigate risks within 90 days
+Moderate – re-inspect and/or mitigate risks within 1 year
+Low – within 10 years if necessary
+Effective Date and Transition Period
+47. This Policy will take effect on January 1, 2027 (“Effective Date”).
+48. Upon taking effect on the Effective Date, this Policy supersedes and replaces all
+previous policies of the Park Board and/or City regarding tree inspection and
+maintenance, including the Park Board’s tree inspection policy approved June 7,
+1993.
+49. For Level 2 inspections of Street Trees, Park Trees, and Civic Trees set out in this
+Policy, the first cycle of such inspections after the Effective Date will be completed
+within 10 years of the Effective Date. For further clarity, compliance with this Policy
+for that first cycle of such inspections, and any given tree to be inspected under that
+first cycle, may be achieved by completing such first cycle within 10 years of the
+Effective Date, regardless of such tree’s inspection and maintenance history prior to
+Park Board Meeting: May 4, 2026APPENDIX D
+the Effective Date.
+Departure from Policy
+50. Conditions may be so unusual or unexpected that departure from this policy may be
+required. In such circumstances, the General Manager of the Park Board (or
+designate), in consultation with the City Manager (or designate), may order a
+departure from this policy.
+51. The order to depart from this policy may include, but is not limited to:
+a. temporarily changing the inspection methods, frequencies or risk mitigation
+response deadlines set out in this Policy;
+b. temporarily suspending part or all tree maintenance operations;
+c. temporarily conducting tree maintenance operations in locations that are not on
+an inspection schedule.
+52. In circumstances where an order to depart from this policy is made, staff will begin
+acting on such an order within 48 hours.
+* * * *
+*
+Park Board Meeting: May 4, 2026
