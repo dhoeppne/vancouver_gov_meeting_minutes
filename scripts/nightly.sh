@@ -13,6 +13,11 @@ set -uo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_DIR" || exit 1
 
+# cron runs with a minimal PATH and no API key — restore both so `node`,
+# `claude`, and ANTHROPIC_API_KEY are available to the report step.
+export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+[ -f "$HOME/vancouver_scraper/.env" ] && . "$HOME/vancouver_scraper/.env"
+
 LOG_DIR="${REPORT_LOG_DIR:-$HOME/vancouver_scraper/logs}"
 mkdir -p "$LOG_DIR"
 

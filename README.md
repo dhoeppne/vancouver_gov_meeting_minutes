@@ -60,35 +60,93 @@ VSB: `board`, `special`, `delegation`.
 | Park bylaws | `parkboardmeetings.vancouver.ca/files/BYLAW-*.pdf` | plus consolidated 2024 park bylaws |
 | VSB policies | `vsb.bc.ca/board-policies-and-bylaws` | cited as "Policy N" in minutes |
 
-## Server bootstrap (scraper host)
+## Server setup (fresh Ubuntu)
+
+Tested on Ubuntu 22.04/24.04 LTS. Run as the non-root user that will own the
+cron job. Replace `dhoeppne/...` if you forked.
+
+### 1. System packages
 
 ```bash
-# 1. Repo-scoped deploy key (add the .pub as a *write-access* deploy key
-#    in GitHub → Settings → Deploy keys)
-ssh-keygen -t ed25519 -f ~/.ssh/vancouver_scraper -C "scraper@homeserver"
+sudo apt-get update
+sudo apt-get install -y git curl python3 python3-venv python3-pip
+```
+
+### 2. Node.js 20 LTS (required by the Claude Code CLI)
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
+node --version    # expect v20.x (Claude Code needs Node 18+)
+```
+
+### 3. Install the Claude Code CLI
+
+Install globally without `sudo` by pointing npm at a user-owned prefix:
+
+```bash
+mkdir -p ~/.npm-global
+npm config set prefix ~/.npm-global
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+npm install -g @anthropic-ai/claude-code
+claude --version    # verify the install
+```
+
+### 4. Authenticate the CLI for unattended runs
+
+Use an API key from <https://console.anthropic.com/> — simplest for cron,
+which has no interactive session:
+
+```bash
+mkdir -p ~/vancouver_scraper
+umask 077
+cat > ~/vancouver_scraper/.env <<'EOF'
+export ANTHROPIC_API_KEY=sk-ant-...      # paste your key
+EOF
+```
+
+`nightly.sh` sources this file automatically. (Interactive `claude login`
+also works for manual runs, but the API key is what makes cron headless.)
+
+### 5. GitHub deploy key (write access)
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/vancouver_scraper -C "scraper@homeserver" -N ""
 cat >> ~/.ssh/config <<'EOF'
 Host github.com-vancouver
     HostName github.com
     IdentityFile ~/.ssh/vancouver_scraper
     IdentitiesOnly yes
 EOF
+cat ~/.ssh/vancouver_scraper.pub
+# → add this at GitHub → repo → Settings → Deploy keys → check "Allow write access"
+```
 
-# 2. Clone + repo-local venv (shared by scraper and PDF renderer)
-mkdir -p ~/vancouver_scraper/logs && cd ~/vancouver_scraper
+### 6. Clone + Python venv
+
+```bash
+cd ~/vancouver_scraper
 git clone git@github.com-vancouver:dhoeppne/vancouver_gov_meeting_minutes.git repo
 cd repo
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 git config user.name "vancouver-scraper"
 git config user.email "tech@davidhoeppner.ca"
+```
 
-# 3. Claude CLI for the report step (https://docs.claude.com/claude-code)
-#    Install and authenticate once: `claude login` (or export ANTHROPIC_API_KEY).
+### 7. First run, then nightly cron
 
-# 4. Manual first run, then cron
-bash scripts/nightly.sh
-crontab -e   # add (runs scrape + report generation every night):
+```bash
+bash scripts/nightly.sh                       # full backfill + first reports
+tail -f ~/vancouver_scraper/logs/cron.log     # watch progress
+
+crontab -e
+# add (use the absolute path; run `echo $HOME` to fill in USER):
 # 30 2 * * * bash /home/USER/vancouver_scraper/repo/scripts/nightly.sh
 ```
+
+`nightly.sh` fixes up `PATH` and sources `~/vancouver_scraper/.env` so cron's
+minimal environment can find `node`/`claude` and your API key.
 
 Useful scraper flags: `--body council|parkboard|vsb`, `--dry-run` (discovery
 only), `--no-git`, `--window-start YYYY-MM-DD`, `--log-dir DIR`.
