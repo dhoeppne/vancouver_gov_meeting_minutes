@@ -135,13 +135,22 @@ export CLAUDE_CODE_OAUTH_TOKEN=...                   # (A) subscription token
 # Where all scraped data + reports are written (must exist / be mounted):
 export VANCOUVER_DATA_DIR=/mnt/hyperion_share_fast/vancouver_meeting_reports
 
-# Email (optional — omit to disable; report PDFs still land in the data dir):
-export SMTP_SERVER=smtp.fastmail.com
-export SMTP_PORT=465                                  # 465 SSL, or 587 STARTTLS
-export SMTP_USERNAME=you@example.com
-export SMTP_PASSWORD=app-password-here
+# Email via Mailtrap (optional — omit to disable; reports still land on disk).
+# Sandbox (captures mail in the Mailtrap inbox) — values from Mailtrap →
+# Email Testing → your inbox → SMTP Settings → "Show Credentials":
+export SMTP_SERVER=sandbox.smtp.mailtrap.io
+export SMTP_PORT=587                                  # 587/2525 STARTTLS, or 465 SSL
+export SMTP_USERNAME=your_mailtrap_inbox_user         # a hash, NOT an email
+export SMTP_PASSWORD=your_mailtrap_inbox_pass
+export SMTP_FROM=reports@davidhoeppner.ca             # real From: (required — username isn't an address)
 EOF
 ```
+
+For Mailtrap **live sending** (delivers to a real inbox) instead of sandbox,
+use `SMTP_SERVER=live.smtp.mailtrap.io`, `SMTP_USERNAME=api`,
+`SMTP_PASSWORD=<your API token>`, and an `SMTP_FROM` on a verified sending
+domain. Either way `SMTP_FROM` is required, because Mailtrap's SMTP username is
+not an email address.
 
 A few nightly headless sessions sit comfortably within Pro/Max limits.
 
@@ -237,19 +246,21 @@ Public Delegations · What to Watch Next.
 
 All commands below assume `cd ~/vancouver_scraper/repo && source ~/vancouver_scraper/.env`.
 
-**Test email** without sending (checks config + which PDFs would attach):
+**Test email** without sending (checks config + From + which PDFs would attach):
 
 ```bash
-.venv/bin/python scripts/send_email.py --to "$SMTP_USERNAME" --dry-run \
+.venv/bin/python scripts/send_email.py --to "$SMTP_FROM" --dry-run \
   "$VANCOUVER_DATA_DIR"/vancouver_city_council/reports/*.pdf
 ```
 
-Then send a real one to yourself (any PDF works) and check your inbox/spam:
+Then send a real one (any PDF works). With Mailtrap **sandbox** the message is
+captured in your Mailtrap inbox (the `--to` can be anything); with **live**
+sending it arrives at the real address:
 
 ```bash
-.venv/bin/python scripts/send_email.py --to "$SMTP_USERNAME" \
+.venv/bin/python scripts/send_email.py --to "$SMTP_FROM" \
   "$(find "$VANCOUVER_DATA_DIR" -path '*/reports/*.pdf' | head -1)"
-# prints "emailed 1 report(s) to ..." on success
+# prints "emailed 1 report(s) to ..." on success → check the Mailtrap inbox (or your inbox)
 ```
 
 **Verify Claude actually ran.** The headless sessions' output (including each
