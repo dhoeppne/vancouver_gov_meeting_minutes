@@ -4,3 +4,9 @@ __pycache__/
 logs/
 *.part
 .DS_Store
+
+# Scraped data lives in $VANCOUVER_DATA_DIR, not the repo (the repo holds only
+# scripts). These are listed for safety; the migration removes the tracked copies.
+vancouver_city_council/
+vancouver_park_board/
+vancouver_school_board/

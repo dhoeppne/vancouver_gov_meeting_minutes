@@ -7,11 +7,12 @@ every bylaw/policy those documents reference. Extracts text from each PDF
 into a .txt sidecar and maintains a per-body manifest.json so the report
 routines can do pure synthesis without touching the network.
 
-Designed for an unattended cron run:
-    30 2 * * * /path/venv/bin/python /path/repo/scripts/scrape.py
+All output is written under the data directory (VANCOUVER_DATA_DIR or
+--data-dir; default /mnt/hyperion_share_fast/vancouver_meeting_reports), which
+lives outside the git repo — the repo holds only the scripts. Usually invoked
+via scripts/nightly.sh.
 
-Each body is scraped independently; one body failing does not stop the
-others. A single git commit is made at the end of the run.
+Each body is scraped independently; one body failing does not stop the others.
 """
 
 import argparse
@@ -22,7 +23,6 @@ import logging
 import os
 import random
 import re
-import subprocess
 import sys
 import tempfile
 import time
@@ -37,12 +37,17 @@ from bs4 import BeautifulSoup
 from curl_cffi import requests
 from curl_cffi.requests.exceptions import HTTPError, RequestException
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
 BODY_DIRS = {
     "council": "vancouver_city_council",
     "parkboard": "vancouver_park_board",
     "vsb": "vancouver_school_board",
 }
+
+# Scraped data (meetings, bylaws, reports, manifests) lives here — outside the
+# git repo, which holds only the scripts. Override with VANCOUVER_DATA_DIR or
+# the --data-dir flag; main() may reassign DATA_DIR from those.
+DEFAULT_DATA_DIR = "/mnt/hyperion_share_fast/vancouver_meeting_reports"
+DATA_DIR = Path(os.environ.get("VANCOUVER_DATA_DIR", DEFAULT_DATA_DIR))
 
 BACKFILL_START = dt.date(2026, 3, 12)
 LOOKBACK_DAYS = 60        # steady-state discovery window into the past
@@ -207,7 +212,11 @@ def download_file(fetcher, url, dest: Path, expect_pdf: bool = True):
     tmp = dest.with_suffix(dest.suffix + ".part")
     tmp.write_bytes(resp.content)
     os.replace(tmp, dest)
-    log.info("downloaded %s", dest.relative_to(REPO_ROOT))
+    try:
+        rel = dest.relative_to(DATA_DIR)
+    except ValueError:
+        rel = dest
+    log.info("downloaded %s", rel)
     return True
 
 
@@ -948,36 +957,6 @@ def process_vsb(fetcher, body_dir, today, args):
 
 
 # --------------------------------------------------------------------------
-# Git
-# --------------------------------------------------------------------------
-
-def run_git(args: list[str], check: bool = True):
-    return subprocess.run(
-        ["git", "-C", str(REPO_ROOT), *args],
-        check=check, capture_output=True, text=True,
-    )
-
-
-def git_start() -> None:
-    run_git(["pull", "--rebase", "--autostash"])
-
-
-def git_finish(summary: str) -> None:
-    run_git(["add", *BODY_DIRS.values()])
-    if run_git(["diff", "--cached", "--quiet"], check=False).returncode == 0:
-        log.info("no changes to commit")
-        return
-    run_git(["commit", "-m", summary])
-    for attempt in range(3):
-        if run_git(["push"], check=False).returncode == 0:
-            log.info("pushed: %s", summary)
-            return
-        log.warning("push rejected (attempt %d), rebasing", attempt + 1)
-        run_git(["pull", "--rebase"], check=False)
-    raise RuntimeError("git push failed after 3 attempts")
-
-
-# --------------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------------
 
@@ -989,18 +968,24 @@ BODY_FUNCS = {
 
 
 def main() -> int:
+    global DATA_DIR
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--body", choices=[*BODY_FUNCS, "all"], default="all")
     parser.add_argument("--dry-run", action="store_true",
                         help="discovery only: print what would be scraped")
-    parser.add_argument("--no-git", action="store_true",
-                        help="skip git pull/commit/push")
+    parser.add_argument("--data-dir", type=Path, default=None,
+                        help="where scraped data is written "
+                             "(default: $VANCOUVER_DATA_DIR or the built-in)")
     parser.add_argument("--window-start", type=dt.date.fromisoformat,
                         default=None, metavar="YYYY-MM-DD",
                         help="override the discovery window start date")
     parser.add_argument("--log-dir", type=Path, default=None,
                         help="also write a rotating log file here")
     args = parser.parse_args()
+
+    if args.data_dir:
+        DATA_DIR = args.data_dir
+    DATA_DIR = DATA_DIR.resolve()
 
     handlers: list[logging.Handler] = [logging.StreamHandler(sys.stderr)]
     if args.log_dir:
@@ -1022,16 +1007,16 @@ def main() -> int:
         log.info("another scrape run is in progress; exiting")
         return 0
 
-    today = dt.date.today()
-    use_git = not (args.no_git or args.dry_run)
-    if use_git:
-        git_start()
+    if not args.dry_run:
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+    log.info("data dir: %s", DATA_DIR)
 
+    today = dt.date.today()
     fetcher = Fetcher(dry_run=args.dry_run)
     bodies = list(BODY_FUNCS) if args.body == "all" else [args.body]
     results: dict[str, dict | None] = {}
     for name in bodies:
-        body_dir = REPO_ROOT / BODY_DIRS[name]
+        body_dir = DATA_DIR / BODY_DIRS[name]
         try:
             results[name] = BODY_FUNCS[name](fetcher, body_dir, today, args)
         except Exception:
@@ -1045,11 +1030,7 @@ def main() -> int:
             f"{name} failed" if c is None
             else f"{name} +{c['new_meetings']}/+{c['new_minutes']}"
         )
-    summary = f"scrape: {today} — {', '.join(parts)}"
-    log.info(summary)
-
-    if use_git:
-        git_finish(summary)
+    log.info("scrape: %s — %s", today, ", ".join(parts))
 
     return 1 if all(c is None for c in results.values()) else 0
 

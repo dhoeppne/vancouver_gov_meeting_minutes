@@ -11,38 +11,46 @@ AI-summarized reports of meeting minutes for Vancouver's government bodies:
 │      · discovers + downloads agendas/minutes                      │
 │      · downloads every cited bylaw/policy                         │
 │      · extracts PDF text to .txt sidecars                         │
-│      · updates manifest.json per body, commits + pushes           │
+│      · updates manifest.json per body                            │
 │ 2. scripts/generate_reports.sh                                    │
 │      · for each body: claude -p <prompt> (headless synthesis)     │
 │      · reads manifest + extracted text, writes reports/<key>.md   │
 │        and renders <key>.pdf                                      │
-│      · commits + pushes all new reports in one push               │
+│      · emails any newly created report PDFs (server-side SMTP)     │
 └──────────────────────────────────────┬────────────────────────────┘
-                                        │ push touching reports/*.pdf
-                       ┌────────────────▼─────────────────┐
-                       │ GitHub Action emails the new PDFs │
-                       │ to tech@davidhoeppner.ca          │
-                       └───────────────────────────────────┘
+   writes everything to $VANCOUVER_DATA_DIR (not git)
+                                        ▼
+        /mnt/hyperion_share_fast/vancouver_meeting_reports/
+            vancouver_city_council/{meetings,bylaws,reports}/  …+ 2 more bodies
 ```
 
-The scraper does **all** information gathering so the report step does pure
-synthesis. Reports are idempotent: one report per meeting, keyed
-`YYYY-MM-DD_<type>`; a meeting is "unreported" iff its `minutes.txt` exists
-and `reports/<key>.pdf` does not. The report step never rewrites existing
-reports. Both halves run unattended on the server — nothing depends on a
-desktop app being open.
+The git repo holds **only the scripts**. All scraped data and reports are
+written to `$VANCOUVER_DATA_DIR` on the server (default
+`/mnt/hyperion_share_fast/vancouver_meeting_reports`). The scraper does **all**
+information gathering so the report step does pure synthesis. Reports are
+idempotent: one report per meeting, keyed `YYYY-MM-DD_<type>`; a meeting is
+"unreported" iff its `minutes.txt` exists and `reports/<key>.pdf` does not. The
+report step never rewrites existing reports. Everything runs unattended on the
+server — nothing depends on a desktop app or on git.
 
-## Repo layout
+## Layout
 
 ```
+# In $VANCOUVER_DATA_DIR (on the server, not git):
 vancouver_city_council/        # same shape for _park_board / _school_board
-├── manifest.json              # single source of truth the routines read
+├── manifest.json              # single source of truth the report step reads
 ├── meetings/<key>/            # agenda.pdf/.txt, minutes.pdf/.txt, attachments/
 ├── bylaws/                    # cited bylaw/policy PDFs + .txt (+ _unresolved.json)
 └── reports/<key>.md + .pdf    # synthesized reports
-scripts/scrape.py              # nightly scraper (standalone)
+
+# In the git repo (scripts only):
+scripts/scrape.py              # nightly scraper → $VANCOUVER_DATA_DIR
+scripts/generate_reports.sh    # headless report synthesis + email
+scripts/nightly.sh             # cron entrypoint (scrape, then reports)
 scripts/md_to_pdf.py           # report.md -> report.pdf (markdown2 + xhtml2pdf)
-.github/workflows/email-reports.yml
+scripts/send_email.py          # emails new report PDFs (stdlib SMTP)
+scripts/report_prompts/*.txt   # per-body synthesis prompts (__DATA_DIR__ placeholder)
+scripts/migrate_to_data_dir.sh # one-time: move existing data out of the repo
 ```
 
 Meeting type codes — council: `regu`, `pspc`, `cfsc`, `phea`, `spec`
@@ -93,23 +101,37 @@ npm install -g @anthropic-ai/claude-code
 claude --version    # verify the install
 ```
 
-### 4. Authenticate the CLI for unattended runs
+### 4. Configure the environment (`~/vancouver_scraper/.env`)
 
-Use an API key from <https://console.anthropic.com/> — simplest for cron,
-which has no interactive session:
+`nightly.sh` sources this file. It holds the Claude API key, the data
+directory, and the SMTP settings for email. Use an API key from
+<https://console.anthropic.com/> (simplest for cron, which has no interactive
+session):
 
 ```bash
 mkdir -p ~/vancouver_scraper
 umask 077
 cat > ~/vancouver_scraper/.env <<'EOF'
-export ANTHROPIC_API_KEY=sk-ant-...      # paste your key
+export ANTHROPIC_API_KEY=sk-ant-...                  # Claude API key
+
+# Where all scraped data + reports are written (must exist / be mounted):
+export VANCOUVER_DATA_DIR=/mnt/hyperion_share_fast/vancouver_meeting_reports
+
+# Email (optional — omit to disable; report PDFs still land in the data dir):
+export SMTP_SERVER=smtp.fastmail.com
+export SMTP_PORT=465                                  # 465 SSL, or 587 STARTTLS
+export SMTP_USERNAME=you@example.com
+export SMTP_PASSWORD=app-password-here
 EOF
 ```
 
-`nightly.sh` sources this file automatically. (Interactive `claude login`
-also works for manual runs, but the API key is what makes cron headless.)
+(Interactive `claude login` also works for manual runs, but the API key is what
+makes cron headless.)
 
-### 5. GitHub deploy key (write access)
+### 5. GitHub deploy key (read-only is enough)
+
+The server only pulls script updates — it never pushes — so a **read-only**
+deploy key suffices:
 
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/vancouver_scraper -C "scraper@homeserver" -N ""
@@ -120,7 +142,7 @@ Host github.com-vancouver
     IdentitiesOnly yes
 EOF
 cat ~/.ssh/vancouver_scraper.pub
-# → add this at GitHub → repo → Settings → Deploy keys → check "Allow write access"
+# → add this at GitHub → repo → Settings → Deploy keys (no write access needed)
 ```
 
 ### 6. Clone + Python venv
@@ -130,11 +152,26 @@ cd ~/vancouver_scraper
 git clone git@github.com-vancouver:dhoeppne/vancouver_gov_meeting_minutes.git repo
 cd repo
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-git config user.name "vancouver-scraper"
-git config user.email "tech@davidhoeppner.ca"
 ```
 
-### 7. First run, then nightly cron
+### 7. (One-time) migrate existing data out of the repo
+
+If the repo still tracks previously-scraped data (the `vancouver_*` body dirs),
+move it into the data directory once so nothing has to be re-scraped. The
+script copies, verifies every file by sha256, then `git rm`s + commits the
+removal locally (you push):
+
+```bash
+bash scripts/migrate_to_data_dir.sh            # copy → verify → git rm → commit
+# (add --dry-run first to copy + verify without touching git)
+git push                                        # publish the removal
+```
+
+It aborts if `$VANCOUVER_DATA_DIR`'s mount isn't present, so it never deletes
+the source after copying to an unmounted path. Skip this step on a fresh repo
+that never stored data.
+
+### 8. First run, then nightly cron
 
 ```bash
 bash scripts/nightly.sh                       # full backfill + first reports
@@ -146,33 +183,30 @@ crontab -e
 ```
 
 `nightly.sh` fixes up `PATH` and sources `~/vancouver_scraper/.env` so cron's
-minimal environment can find `node`/`claude` and your API key.
+minimal environment can find `node`/`claude`, your API key, `VANCOUVER_DATA_DIR`,
+and the SMTP settings.
 
 Useful scraper flags: `--body council|parkboard|vsb`, `--dry-run` (discovery
-only), `--no-git`, `--window-start YYYY-MM-DD`, `--log-dir DIR`.
+only), `--data-dir DIR`, `--window-start YYYY-MM-DD`, `--log-dir DIR`.
 
-## Email notifications
-
-Add these **Actions secrets** (GitHub → Settings → Secrets and variables →
-Actions): `SMTP_SERVER`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`.
-Until they exist the email step skips silently; report PDFs are always
-committed regardless.
-
-## Report generation (headless)
+## Report generation (headless) & email
 
 After the scrape, [`scripts/generate_reports.sh`](scripts/generate_reports.sh)
-runs `claude -p` once per body using the self-contained prompts in
-[`scripts/report_prompts/`](scripts/report_prompts/). Each headless session
-does pure synthesis — reads the manifest + extracted text, writes
-`reports/<key>.md`, and renders `<key>.pdf` — and never touches git or the
-network. The wrapper owns all git: it commits and pushes every new report in
-one push, which triggers the email Action.
+runs `claude -p` once per body using the prompts in
+[`scripts/report_prompts/`](scripts/report_prompts/) (the `__DATA_DIR__`
+placeholder is substituted with `$VANCOUVER_DATA_DIR` at runtime). Each headless
+session does pure synthesis — reads the manifest + extracted text under the data
+dir, writes `reports/<key>.md`, and renders `<key>.pdf` with the repo's
+`.venv` — and never touches git or the network. It runs with `--add-dir
+$VANCOUVER_DATA_DIR` so it can read/write the data tree, while cwd stays the repo
+so the committed [`.claude/settings.json`](.claude/settings.json) allowlist (file
+tools + `.venv/bin/python`, no git/network) applies and cron never blocks on a
+prompt. Reports are processed at most 5 per body per run, oldest first.
 
-Permissions for the headless runs are scoped by the committed
-[`.claude/settings.json`](.claude/settings.json) allowlist (file tools +
-`.venv/bin/python` for rendering, no git or network), so cron runs never block
-on a permission prompt. Reports are processed at most 5 per body per run,
-oldest first, to bound cost.
+**Email:** the wrapper diffs the report PDFs before/after the run and emails any
+new ones via [`scripts/send_email.py`](scripts/send_email.py) (stdlib SMTP,
+using the `SMTP_*` vars from `.env`). If SMTP isn't configured the step is a
+silent no-op — reports always land in the data dir regardless.
 
 Cadence is simply "every night" — each body is a cheap no-op when nothing new
 has published (council minutes lag ~2 weeks, park board 1–2 weeks, VSB minutes
