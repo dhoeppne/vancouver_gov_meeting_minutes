@@ -38,6 +38,28 @@ TIMEOUT_S="${REPORT_TIMEOUT:-1800}"
 ts() { date +'%Y-%m-%dT%H:%M:%S%z'; }
 log() { echo "$(ts) $*" >>"$LOG"; }
 
+# Map a body short-name to its data directory.
+body_dir() {
+  case "$1" in
+    council)   echo vancouver_city_council ;;
+    parkboard) echo vancouver_park_board ;;
+    vsb)       echo vancouver_school_board ;;
+  esac
+}
+
+# True (0) if a body has at least one meeting with minutes but no report yet —
+# the same condition the report prompt uses to build its work list. Lets us
+# skip the (paid) claude call entirely when there's nothing to do.
+has_unreported() {
+  local bdir="$DATA_DIR/$(body_dir "$1")" mins key
+  for mins in "$bdir"/meetings/*/minutes.txt; do
+    [ -e "$mins" ] || continue          # glob didn't match → no meetings
+    key="$(basename "$(dirname "$mins")")"
+    [ -f "$bdir/reports/$key.pdf" ] || return 0
+  done
+  return 1
+}
+
 if [ ! -d "$DATA_DIR" ]; then
   log "ERROR data dir $DATA_DIR does not exist; aborting report run"
   exit 1
@@ -61,6 +83,10 @@ command -v timeout >/dev/null 2>&1 && TIMEOUT_BIN="timeout ${TIMEOUT_S}"
 for body in council parkboard vsb; do
   prompt_file="scripts/report_prompts/${body}.txt"
   [ -f "$prompt_file" ] || { log "WARN missing prompt $prompt_file"; continue; }
+  if ! has_unreported "$body"; then
+    log "no unreported ${body} meetings; skipping claude"
+    continue
+  fi
   log "generating ${body} reports"
   prompt="$(sed "s#__DATA_DIR__#${DATA_DIR}#g" "$prompt_file")"
   if ! $TIMEOUT_BIN "$CLAUDE_BIN" -p "$prompt" \
@@ -71,7 +97,10 @@ done
 
 # Email any newly created report PDFs (no-op if SMTP_* unset).
 find "$DATA_DIR" -path '*/reports/*.pdf' 2>/dev/null | sort >"$after"
-mapfile -t new < <(comm -13 "$before" "$after")
+new=()
+while IFS= read -r line; do
+  [ -n "$line" ] && new+=("$line")
+done < <(comm -13 "$before" "$after")
 if [ "${#new[@]}" -eq 0 ]; then
   log "no new reports"
   exit 0
