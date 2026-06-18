@@ -10,7 +10,8 @@ SMTP settings come from the environment (set them in
     SMTP_USERNAME  SMTP login (Mailtrap: the inbox user, or "api" for sending)
     SMTP_PASSWORD  SMTP password / API token
     SMTP_FROM      the From: address (required to send; --from overrides)
-    SMTP_TO        the recipient address (required to send; --to overrides)
+    SMTP_TO        recipient(s): one address or a comma-separated list, e.g.
+                   "a@x.com, b@y.com" (required to send; --to overrides)
 
 From and To are independent — different addresses and domains are fine, and
 neither is tied to the SMTP login (Mailtrap's username is not an email
@@ -32,7 +33,7 @@ from _env import load_env
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--to", default=None,
-                        help="recipient address (default: $SMTP_TO)")
+                        help="recipient(s), comma-separated (default: $SMTP_TO)")
     parser.add_argument("--from", dest="from_addr", default=None,
                         help="sender address (default: $SMTP_FROM)")
     parser.add_argument("--subject", default=None, help="override subject")
@@ -50,7 +51,9 @@ def main() -> int:
     # From: is separate from the SMTP login too — Mailtrap's username is a hash
     # (sandbox) or the literal "api" (live), never an email address.
     from_addr = args.from_addr or os.environ.get("SMTP_FROM", "")
-    to_addr = args.to or os.environ.get("SMTP_TO", "")
+    # SMTP_TO / --to may be a single address or a comma-separated list.
+    to_raw = args.to or os.environ.get("SMTP_TO", "")
+    recipients = [a.strip() for a in to_raw.split(",") if a.strip()]
 
     pdfs = [p for p in args.pdfs if p.is_file()]
     if not pdfs:
@@ -60,7 +63,7 @@ def main() -> int:
     names = ", ".join(p.name for p in pdfs)
     msg = EmailMessage()
     msg["From"] = from_addr
-    msg["To"] = to_addr
+    msg["To"] = ", ".join(recipients)
     msg["Subject"] = args.subject or f"New Vancouver meeting reports: {names}"
     msg.set_content(
         "New meeting report PDFs are attached:\n\n"
@@ -76,7 +79,8 @@ def main() -> int:
         print(f"[dry-run] would send via {server or '(SMTP_SERVER unset)'}:{port}"
               f" as {username or '(SMTP_USERNAME unset)'}")
         print(f"[dry-run] From: {from_addr or '(set SMTP_FROM)'}")
-        print(f"[dry-run] To:   {to_addr or '(set SMTP_TO or --to)'}")
+        print(f"[dry-run] To:   {', '.join(recipients) or '(set SMTP_TO or --to)'}"
+              f" [{len(recipients)} recipient(s)]")
         print(f"[dry-run] Subject: {msg['Subject']}")
         for p in pdfs:
             print(f"[dry-run] attach: {p.name} ({p.stat().st_size:,} bytes)")
@@ -88,7 +92,7 @@ def main() -> int:
     if not from_addr:
         print("SMTP_FROM (sender) is required; skipping email", file=sys.stderr)
         return 1
-    if not to_addr:
+    if not recipients:
         print("SMTP_TO (recipient) is required; skipping email", file=sys.stderr)
         return 1
 
@@ -97,16 +101,16 @@ def main() -> int:
             ctx = ssl.create_default_context()
             with smtplib.SMTP_SSL(server, port, context=ctx) as s:
                 s.login(username, password)
-                s.send_message(msg)
+                s.send_message(msg, to_addrs=recipients)
         else:
             with smtplib.SMTP(server, port) as s:
                 s.starttls(context=ssl.create_default_context())
                 s.login(username, password)
-                s.send_message(msg)
+                s.send_message(msg, to_addrs=recipients)
     except Exception as exc:  # noqa: BLE001 - email must never crash the run
         print(f"email failed: {exc}", file=sys.stderr)
         return 1
-    print(f"emailed {len(pdfs)} report(s) to {args.to}")
+    print(f"emailed {len(pdfs)} report(s) to {', '.join(recipients)}")
     return 0
 
 

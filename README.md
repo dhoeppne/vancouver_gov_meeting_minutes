@@ -144,13 +144,15 @@ export SMTP_USERNAME=your_mailtrap_inbox_user         # a hash, NOT an email
 export SMTP_PASSWORD=your_mailtrap_inbox_pass
 # From and To are independent — different addresses/domains are fine:
 export SMTP_FROM=reports@sender-domain.com            # the From: address
-export SMTP_TO=you@your-domain.com                    # the recipient
+export SMTP_TO=you@your-domain.com                    # recipient(s): comma-separated for several
 EOF
 ```
 
 `SMTP_FROM` and `SMTP_TO` are both required to send and may be on entirely
 different domains; neither is tied to `SMTP_USERNAME` (Mailtrap's username is
-not an email address). For Mailtrap **live sending** (delivers to a real inbox)
+not an email address). `SMTP_TO` accepts **multiple recipients as a
+comma-separated list** (e.g. `SMTP_TO="me@a.com, team@b.com"`); all of them
+receive the same email. For Mailtrap **live sending** (delivers to a real inbox)
 instead of sandbox, use `SMTP_SERVER=live.smtp.mailtrap.io`,
 `SMTP_USERNAME=api`, `SMTP_PASSWORD=<your API token>`, and an `SMTP_FROM` on a
 verified sending domain.
