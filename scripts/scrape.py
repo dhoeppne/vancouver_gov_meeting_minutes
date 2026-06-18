@@ -26,6 +26,7 @@ import re
 import sys
 import tempfile
 import time
+import xml.etree.ElementTree as ET
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from urllib.parse import urljoin
@@ -67,12 +68,20 @@ HEADERS = {
 }
 
 COUNCIL_BASE = "https://council.vancouver.ca"
+# Official feed of council meeting events (agendas/minutes). Primary discovery
+# source — one request lists every meeting changed in the last N days, vs.
+# guessing date folders. ?ChangedInLastXDays=N controls the window.
+COUNCIL_RSS = "https://covapp.vancouver.ca/councilMeetingPublic/rss.aspx?ChangedInLastXDays={days}"
+# Agenda links look like .../20260603/pspc20260603ag.htm — capture code + date.
+COUNCIL_LINK_RE = re.compile(r"([a-z]{3,5})(\d{8})ag\.(?:htm|pdf)", re.IGNORECASE)
+# Labels for the date-probe fallback; the RSS feed supplies its own titles.
 COUNCIL_TYPES = {
     "regu": "Regular Council",
     "pspc": "Standing Committee on Policy and Strategic Priorities",
     "cfsc": "Standing Committee on City Finance and Services",
     "phea": "Public Hearing",
     "spec": "Special Council",
+    "blhe": "Special Council (Business Licence Hearing)",
 }
 COUNCIL_BYLAW_URLS = [
     "https://bylaws.vancouver.ca/consolidated/{n}.pdf",
@@ -143,12 +152,13 @@ class Fetcher:
             time.sleep(random.uniform(0.8, 1.8))
 
     def _request(self, method: str, url: str, allow_404: bool = False,
-                 light: bool = False, **kwargs):
+                 light: bool = False, timeout: int = 30, retries: int = 3,
+                 **kwargs):
         last_exc: Exception = RequestException(f"unreachable: {url}")
-        for attempt in range(3):
+        for attempt in range(retries):
             self._pause(light)
             try:
-                resp = self.session.request(method, url, timeout=30, **kwargs)
+                resp = self.session.request(method, url, timeout=timeout, **kwargs)
             except RequestException as exc:
                 last_exc = exc
                 time.sleep(2 * (attempt + 1))
@@ -163,9 +173,11 @@ class Fetcher:
             return resp
         raise last_exc
 
-    def get(self, url: str, allow_404: bool = False, light: bool = False):
+    def get(self, url: str, allow_404: bool = False, light: bool = False,
+            timeout: int = 30, retries: int = 3):
         """GET a URL. Returns the response, or None on 404 when allowed."""
-        return self._request("GET", url, allow_404=allow_404, light=light)
+        return self._request("GET", url, allow_404=allow_404, light=light,
+                             timeout=timeout, retries=retries)
 
     def post(self, url: str, data: dict):
         return self._request("POST", url, data=data)
@@ -426,7 +438,7 @@ def meeting_texts(mdir: Path) -> str:
 def probe_council_date(fetcher, dstr: str) -> set[str]:
     """Return the set of meeting type codes that exist for a date folder."""
     pattern = re.compile(
-        r"(regu|pspc|cfsc|phea|spec)(\d{8})ag\.(?:htm|pdf)", re.IGNORECASE
+        r"(regu|pspc|cfsc|phea|spec|blhe)(\d{8})ag\.(?:htm|pdf)", re.IGNORECASE
     )
     found: set[str] = set()
     # Directory listings are disabled (403) on the live server; remember the
@@ -543,47 +555,109 @@ def council_bylaws(fetcher, body_dir, key, m, unresolved):
         )
 
 
+def discover_council_rss(fetcher, start, end, today):
+    """Discover council meetings from the official RSS feed.
+
+    Returns {key: (iso_date, code, label)} for meetings within [start, end],
+    or None if the feed could not be fetched/parsed (caller falls back to
+    date-folder probing). Cancelled and in-camera meetings are excluded.
+    """
+    days = min(max((today - start).days + 2, 7), 120)
+    # The covapp RSS endpoint is intermittently slow / 500s; bound the attempt
+    # (2 tries) so a flaky feed falls back to date probing quickly.
+    try:
+        resp = fetcher.get(COUNCIL_RSS.format(days=days), allow_404=True,
+                           timeout=45, retries=2)
+    except RequestException as exc:
+        log.warning("council RSS fetch failed: %s", exc)
+        return None
+    if resp is None:
+        return None
+    try:
+        root = ET.fromstring(resp.content)
+    except ET.ParseError as exc:
+        log.warning("council RSS parse failed: %s", exc)
+        return None
+    found: dict[str, tuple] = {}
+    for item in root.iter("item"):
+        title = (item.findtext("title") or "").strip()
+        link = (item.findtext("link") or "").strip()
+        if "CANCELLED" in title.upper():
+            continue
+        mm = COUNCIL_LINK_RE.search(link)
+        if not mm:
+            continue
+        code, dstr = mm.group(1).lower(), mm.group(2)
+        if code == "icre":  # in-camera: no public documents
+            continue
+        try:
+            date = dt.datetime.strptime(dstr, "%Y%m%d").date()
+        except ValueError:
+            continue
+        if not start <= date <= end:
+            continue
+        iso = date.isoformat()
+        # Strip the trailing "(Mon D, YYYY HH:MM AM)" timestamp from the title.
+        label = re.sub(r"\s*\([^()]*\b\d{4}\b[^()]*\)\s*$", "", title) \
+            or COUNCIL_TYPES.get(code, "Council")
+        found.setdefault(f"{iso}_{code}", (iso, code, label))
+    return found
+
+
 def process_council(fetcher, body_dir, today, args):
     manifest = load_manifest(body_dir, "vancouver_city_council")
     counters = {"new_meetings": 0, "new_minutes": 0}
     start, end = scrape_window(manifest, today, args.window_start)
     log.info("council: window %s..%s", start, end)
 
-    # Discovery: probe date folders inside the window.
-    date = start
-    while date <= end:
-        iso = date.isoformat()
-        dstr = date.strftime("%Y%m%d")
-        known = [m for m in manifest["meetings"].values() if m["date"] == iso]
-        probed_empty = iso in manifest["probed_empty"]
-        final_empty = probed_empty and (
-            (today - date).days > EMPTY_PROBE_FINAL_DAYS
-        )
-        if not known and not final_empty:
-            types_found = probe_council_date(fetcher, dstr)
-            if args.dry_run:
-                if types_found:
-                    log.info("dry-run: %s -> %s", iso, sorted(types_found))
-            elif types_found:
-                manifest["probed_empty"].pop(iso, None)
-                for code in sorted(types_found):
-                    meeting_entry(
-                        manifest, f"{iso}_{code}", iso, code,
-                        COUNCIL_TYPES[code],
-                        f"{COUNCIL_BASE}/{dstr}/", today, counters,
-                    )
-            else:
-                manifest["probed_empty"][iso] = today.isoformat()
-        date += dt.timedelta(days=1)
-
-    if args.dry_run:
-        return counters
-
-    # Prune ancient negative-cache entries (loop never revisits them).
-    cutoff = (today - dt.timedelta(days=90)).isoformat()
-    manifest["probed_empty"] = {
-        d: seen for d, seen in manifest["probed_empty"].items() if d >= cutoff
-    }
+    # Discovery: prefer the official RSS feed; fall back to date probing.
+    rss = discover_council_rss(fetcher, start, end, today)
+    if rss is not None:
+        log.info("council: RSS listed %d meeting(s) in window", len(rss))
+        if args.dry_run:
+            for key, (_iso, _code, label) in sorted(rss.items()):
+                log.info("dry-run: %s (%s)", key, label)
+            return counters
+        for key, (iso, code, label) in sorted(rss.items()):
+            dstr = iso.replace("-", "")
+            meeting_entry(manifest, key, iso, code, label,
+                          f"{COUNCIL_BASE}/{dstr}/", today, counters)
+    else:
+        log.warning("council: RSS unavailable; falling back to date probing")
+        date = start
+        while date <= end:
+            iso = date.isoformat()
+            dstr = date.strftime("%Y%m%d")
+            known = [m for m in manifest["meetings"].values()
+                     if m["date"] == iso]
+            probed_empty = iso in manifest["probed_empty"]
+            final_empty = probed_empty and (
+                (today - date).days > EMPTY_PROBE_FINAL_DAYS
+            )
+            if not known and not final_empty:
+                types_found = probe_council_date(fetcher, dstr)
+                if args.dry_run:
+                    if types_found:
+                        log.info("dry-run: %s -> %s", iso, sorted(types_found))
+                elif types_found:
+                    manifest["probed_empty"].pop(iso, None)
+                    for code in sorted(types_found):
+                        meeting_entry(
+                            manifest, f"{iso}_{code}", iso, code,
+                            COUNCIL_TYPES.get(code, "Council"),
+                            f"{COUNCIL_BASE}/{dstr}/", today, counters,
+                        )
+                else:
+                    manifest["probed_empty"][iso] = today.isoformat()
+            date += dt.timedelta(days=1)
+        if args.dry_run:
+            return counters
+        # Prune ancient negative-cache entries (loop never revisits them).
+        cutoff = (today - dt.timedelta(days=90)).isoformat()
+        manifest["probed_empty"] = {
+            d: seen for d, seen in manifest["probed_empty"].items()
+            if d >= cutoff
+        }
 
     # Document + bylaw phase for every incomplete meeting.
     unresolved = load_unresolved(body_dir)

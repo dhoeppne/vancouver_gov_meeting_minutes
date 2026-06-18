@@ -61,7 +61,7 @@ VSB: `board`, `special`, `delegation`.
 
 | Body | Source | Notes |
 |---|---|---|
-| City Council | `council.vancouver.ca/YYYYMMDD/<type>YYYYMMDD{ag,min}` | date folders probed per type; minutes lag ~2 weeks |
+| City Council | RSS feed `covapp.vancouver.ca/councilMeetingPublic/rss.aspx?ChangedInLastXDays=N`; docs at `council.vancouver.ca/YYYYMMDD/<type>YYYYMMDD{ag,min}` | RSS is primary discovery (one request, all meeting types incl. business-licence hearings, flags cancellations); falls back to per-type date-folder probing if the (intermittently flaky) feed is down. Minutes lag ~2 weeks |
 | Park Board | `parkboardmeetings.vancouver.ca/YYYY/index.htm` | Cloudflare-protected → scraper uses curl_cffi Chrome impersonation |
 | School Board | CMS media-library API behind `vsb.bc.ca/meeting-agendas-and-minutes` | media URLs contain hashes; never constructed, always discovered |
 | Council bylaws | `bylaws.vancouver.ca` (`consolidated/{n}.pdf`, `{n}c.PDF`) | cited as "By-law No. N" in agendas/minutes |
