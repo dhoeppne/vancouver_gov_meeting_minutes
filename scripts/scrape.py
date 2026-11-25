@@ -1230,7 +1230,8 @@ def process_metro(fetcher, body_dir, today, args):
             continue
         mdir = body_dir / "meetings" / key
         url = f"{METRO_BASE}/RD-{m['date']}-MIN.pdf"
-        if not (mdir / "minutes.pdf").exists() and should_check_minutes(m, today):
+        first_look = m["status"] == "discovered"
+        if not (mdir / "minutes.pdf").exists() and (first_look or should_check_minutes(m, today)):
             if download_file(fetcher, url, mdir / "minutes.pdf") is True:
                 counters["new_minutes"] += 1
         if (mdir / "minutes.pdf").exists():
