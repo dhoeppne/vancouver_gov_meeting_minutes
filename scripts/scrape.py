@@ -812,7 +812,11 @@ def process_parkboard(fetcher, body_dir, today, args):
     for key in sorted(manifest["meetings"]):
         m = manifest["meetings"][key]
         mdir = body_dir / "meetings" / key
+        own = minutes_by_date.get(m["date"].replace("-", ""), [])
+        best = parkboard_best_minutes(own, m.get("type") == "committee")
         repaired = parkboard_drop_wrong_minutes(m, mdir, key)
+        if not repaired and best is not None:
+            repaired = parkboard_upgrade_minutes(m, mdir, key, best)
         if not repaired and m["status"] == "complete":
             continue
         if not repaired and m["status"] == "stale" and key not in folders:
@@ -843,13 +847,9 @@ def process_parkboard(fetcher, body_dir, today, args):
         # Minutes: the board minutes of this date. Committee minutes of the
         # same date go in as an attachment, or as the minutes of a committee
         # meeting.
-        own = minutes_by_date.get(m["date"].replace("-", ""), [])
-        board = [u for u in own if "committee" not in u.lower()]
-        committee = [u for u in own if "committee" in u.lower()]
-        if m.get("type") == "committee":
-            board, committee = committee, board
-        if board:
-            url = board[0]
+        committee = [u for u in own if u != best and "committee" in u.lower()]
+        if best is not None:
+            url = best
             if not (mdir / "minutes.pdf").exists():
                 if download_file(fetcher, url, mdir / "minutes.pdf") is True:
                     counters["new_minutes"] += 1
@@ -898,6 +898,43 @@ def parkboard_doc_date(name: str) -> str | None:
     except ValueError:
         return None
     return mm.group(1)
+
+
+def parkboard_best_minutes(urls: list[str], committee_meeting: bool) -> str | None:
+    """The minutes file of one date that holds the whole meeting.
+
+    A folder posts MINUTES_pb_<date>.pdf on the night, which holds only the
+    committee part. The next folder posts MINUTES_pb_<date>-Board.pdf with the
+    board meeting, and -Committee.pdf. Prefer -Board, then the plain file.
+    """
+    def rank(url: str) -> int:
+        name = url.rsplit("/", 1)[-1].lower()
+        if committee_meeting:
+            return 0 if "-committee" in name else (1 if "-board" not in name else 2)
+        if "-board" in name:
+            return 0
+        return 2 if "committee" in name else 1
+
+    candidates = sorted(urls, key=rank)
+    if not candidates:
+        return None
+    if not committee_meeting and rank(candidates[0]) == 2:
+        return None
+    return candidates[0]
+
+
+def parkboard_upgrade_minutes(m, mdir: Path, key: str, best: str) -> bool:
+    """Replace held minutes with a better file of the same date. True when replaced."""
+    current = (m.get("minutes") or {}).get("url")
+    if not current or current == best:
+        return False
+    for name in ("minutes.pdf", "minutes.txt"):
+        (mdir / name).unlink(missing_ok=True)
+    m["minutes"] = None
+    m["status"] = "discovered"
+    log.warning("parkboard %s: replaced %s with %s", key,
+                current.rsplit("/", 1)[-1], best.rsplit("/", 1)[-1])
+    return True
 
 
 def parkboard_drop_wrong_minutes(m, mdir: Path, key: str) -> bool:
