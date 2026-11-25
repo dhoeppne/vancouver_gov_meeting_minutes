@@ -2,7 +2,8 @@
 """Nightly scraper for Vancouver civic meeting documents.
 
 Downloads meeting agendas, minutes, and attachments for Vancouver City
-Council, the Vancouver Park Board, and the Vancouver School Board, plus
+Council, the Vancouver Park Board, the Vancouver School Board, the Metro
+Vancouver Regional District Board and TransLink's Mayors' Council, plus
 every bylaw/policy those documents reference. Extracts text from each PDF
 into a .txt sidecar and maintains a per-body manifest.json so the report
 routines can do pure synthesis without touching the network.
@@ -44,6 +45,8 @@ BODY_DIRS = {
     "council": "vancouver_city_council",
     "parkboard": "vancouver_park_board",
     "vsb": "vancouver_school_board",
+    "metro": "metro_vancouver_board",
+    "translink": "translink_mayors_council",
 }
 
 # Scraped data (meetings, bylaws, reports, manifests) lives here — outside the
@@ -82,6 +85,8 @@ COUNCIL_TYPES = {
     "phea": "Public Hearing",
     "spec": "Special Council",
     "blhe": "Special Council (Business Licence Hearing)",
+    # Held once a term, after the local election.
+    "inau": "Inaugural Council",
 }
 COUNCIL_BYLAW_URLS = [
     "https://bylaws.vancouver.ca/consolidated/{n}.pdf",
@@ -98,6 +103,31 @@ PARK_CONSOLIDATED_BYLAWS = (
 PARK_ATTACHMENT_PREFIXES = (
     "REPORT", "DECISION", "MOTION", "MEMO", "HIGHLIGHTS", "PRESENTATION",
 )
+
+# A Park Board folder also posts the minutes of earlier meetings, for adoption.
+# The date in a file name (MINUTES_pb_20261026-Board.pdf) names its meeting.
+PARK_DOC_DATE_RE = re.compile(r"(\d{8})")
+
+# Metro Vancouver Regional District (MVRD) Board. The agenda page is rendered
+# client-side, but the files follow one name pattern, so dates are probed:
+# RD-2026-09-25-AGE.pdf (agenda package) and RD-2026-09-25-MIN.pdf (minutes).
+METRO_BASE = "https://metrovancouver.org/boards/GVRD"
+
+# TransLink's Mayors' Council on Regional Transportation. The page lists each
+# meeting with its agenda package. There is no separate minutes file: the
+# draft minutes of a meeting travel in the agenda package of a later meeting.
+TRANSLINK_PAGE = (
+    "https://www.translink.ca/about-us/about-translink/"
+    "mayors-council-on-regional-transportation"
+)
+TRANSLINK_DATE_RE = re.compile(r"Date:\s*([A-Za-z]+)\.?\s+(\d{1,2}),\s*(\d{4})")
+TRANSLINK_MINUTES_HEAD_RE = re.compile(r"DRAFT\s+PUBLIC\s+MEETING\s+MINUTES")
+TRANSLINK_MINUTES_HELD_RE = re.compile(
+    r"Minutes of the Public Meeting of the Mayors.{0,160}?held\s+"
+    r"([A-Za-z]+)\.?\s+(\d{1,2}),\s*(\d{4})",
+    re.S,
+)
+TRANSLINK_ADJOURNED_RE = re.compile(r"was\s+adjourned")
 
 VSB_BASE = "https://www.vsb.bc.ca"
 VSB_LISTING_PAGE = f"{VSB_BASE}/meeting-agendas-and-minutes"
@@ -743,69 +773,98 @@ def process_parkboard(fetcher, body_dir, today, args):
         extract_pdf_text(consolidated, consolidated.with_suffix(".txt"))
 
     unresolved = load_unresolved(body_dir)
+
+    # Read the folder of every meeting in the window, and of every meeting
+    # that is not done yet. A folder also posts the minutes of earlier
+    # meetings, so minutes are matched to meetings by the date in their file
+    # name, across all folders, and never by the folder they sit in.
+    folders: dict[str, list[str]] = {}
     for key in sorted(manifest["meetings"]):
         m = manifest["meetings"][key]
-        if m["status"] in ("complete", "stale"):
+        in_window = dt.date.fromisoformat(m["date"]) >= start
+        if not in_window and m["status"] in ("complete", "stale"):
             continue
-        mdir = body_dir / "meetings" / key
-        mdir.mkdir(parents=True, exist_ok=True)
         try:
             resp = fetcher.get(m["source_url"], allow_404=True)
         except RequestException as exc:
             log.warning("parkboard folder fetch failed %s: %s", key, exc)
-            resp = None
-        if resp is not None:
-            soup = BeautifulSoup(resp.text, "html.parser")
-            for a in soup.find_all("a", href=True):
-                href = a["href"]
-                if not href.lower().endswith(".pdf"):
-                    continue
-                url = urljoin(m["source_url"], href)
-                name = url.rsplit("/", 1)[-1]
-                kind = parkboard_classify(name)
-                if kind == "agenda":
-                    if download_file(fetcher, url, mdir / "agenda.pdf") is True:
-                        extract_pdf_text(mdir / "agenda.pdf",
-                                         mdir / "agenda.txt")
-                        m["agenda"] = {
-                            "url": url,
-                            "pdf": f"meetings/{key}/agenda.pdf",
-                            "txt": f"meetings/{key}/agenda.txt",
-                        }
-                elif kind == "minutes":
-                    if not (mdir / "minutes.pdf").exists():
-                        if download_file(fetcher, url, mdir / "minutes.pdf") is True:
-                            counters["new_minutes"] += 1
-                    if (mdir / "minutes.pdf").exists():
-                        quality = extract_pdf_text(mdir / "minutes.pdf",
-                                                   mdir / "minutes.txt")
-                        m["minutes"] = {
-                            "url": url,
-                            "published": True,
-                            "pdf": f"meetings/{key}/minutes.pdf",
-                            "txt": f"meetings/{key}/minutes.txt",
-                            "text_quality": quality,
-                        }
-                elif kind == "attachment":
-                    dest = mdir / "attachments" / name
-                    if download_file(fetcher, url, dest) is True:
-                        extract_pdf_text(dest, dest.with_suffix(".txt"))
-                        rel = f"meetings/{key}/attachments/{name}"
-                        if not any(att["name"] == name
-                                   for att in m["attachments"]):
-                            m["attachments"].append({
-                                "name": name,
-                                "pdf": rel,
-                                "txt": rel.rsplit(".", 1)[0] + ".txt",
-                            })
-                elif kind == "bylaw":
-                    dest = body_dir / "bylaws" / name
-                    if download_file(fetcher, url, dest) is True:
-                        extract_pdf_text(dest, dest.with_suffix(".txt"))
-                        record_bylaw(
-                            m, name, None, f"bylaws/{name}",
-                            f"bylaws/{name.rsplit('.', 1)[0]}.txt", True,
-                        )
+            continue
+        if resp is None:
+            continue
+        soup = BeautifulSoup(resp.text, "html.parser")
+        folders[key] = [
+            urljoin(m["source_url"], a["href"])
+            for a in soup.find_all("a", href=True)
+            if a["href"].lower().endswith(".pdf")
+        ]
+    minutes_by_date: dict[str, list[str]] = {}
+    for urls in folders.values():
+        for url in urls:
+            name = url.rsplit("/", 1)[-1]
+            when = parkboard_doc_date(name)
+            if parkboard_classify(name) != "minutes" or when is None:
+                continue
+            found = minutes_by_date.setdefault(when, [])
+            if not any(u.rsplit("/", 1)[-1].lower() == name.lower()
+                       for u in found):
+                found.append(url)
+
+    for key in sorted(manifest["meetings"]):
+        m = manifest["meetings"][key]
+        mdir = body_dir / "meetings" / key
+        repaired = parkboard_drop_wrong_minutes(m, mdir, key)
+        if not repaired and m["status"] == "complete":
+            continue
+        if not repaired and m["status"] == "stale" and key not in folders:
+            continue
+        mdir.mkdir(parents=True, exist_ok=True)
+        for url in folders.get(key, []):
+            name = url.rsplit("/", 1)[-1]
+            kind = parkboard_classify(name)
+            if kind == "agenda":
+                if download_file(fetcher, url, mdir / "agenda.pdf") is True:
+                    extract_pdf_text(mdir / "agenda.pdf", mdir / "agenda.txt")
+                    m["agenda"] = {
+                        "url": url,
+                        "pdf": f"meetings/{key}/agenda.pdf",
+                        "txt": f"meetings/{key}/agenda.txt",
+                    }
+            elif kind == "attachment":
+                parkboard_attach(fetcher, mdir, key, m, url)
+            elif kind == "bylaw":
+                dest = body_dir / "bylaws" / name
+                if download_file(fetcher, url, dest) is True:
+                    extract_pdf_text(dest, dest.with_suffix(".txt"))
+                    record_bylaw(
+                        m, name, None, f"bylaws/{name}",
+                        f"bylaws/{name.rsplit('.', 1)[0]}.txt", True,
+                    )
+
+        # Minutes: the board minutes of this date. Committee minutes of the
+        # same date go in as an attachment, or as the minutes of a committee
+        # meeting.
+        own = minutes_by_date.get(m["date"].replace("-", ""), [])
+        board = [u for u in own if "committee" not in u.lower()]
+        committee = [u for u in own if "committee" in u.lower()]
+        if m.get("type") == "committee":
+            board, committee = committee, board
+        if board:
+            url = board[0]
+            if not (mdir / "minutes.pdf").exists():
+                if download_file(fetcher, url, mdir / "minutes.pdf") is True:
+                    counters["new_minutes"] += 1
+            if (mdir / "minutes.pdf").exists():
+                quality = extract_pdf_text(mdir / "minutes.pdf",
+                                           mdir / "minutes.txt")
+                m["minutes"] = {
+                    "url": url,
+                    "published": True,
+                    "pdf": f"meetings/{key}/minutes.pdf",
+                    "txt": f"meetings/{key}/minutes.txt",
+                    "text_quality": quality,
+                }
+        for url in committee:
+            parkboard_attach(fetcher, mdir, key, m, url)
         if not m.get("minutes"):
             m["minutes"] = {"url": None, "published": False}
 
@@ -827,6 +886,53 @@ def process_parkboard(fetcher, body_dir, today, args):
     manifest["backfill_complete"] = True
     save_manifest(body_dir, manifest)
     return counters
+
+
+def parkboard_doc_date(name: str) -> str | None:
+    """The YYYYMMDD date in a Park Board file name, or None."""
+    mm = PARK_DOC_DATE_RE.search(name)
+    if not mm:
+        return None
+    try:
+        dt.datetime.strptime(mm.group(1), "%Y%m%d")
+    except ValueError:
+        return None
+    return mm.group(1)
+
+
+def parkboard_drop_wrong_minutes(m, mdir: Path, key: str) -> bool:
+    """Remove minutes whose file name carries another meeting's date.
+
+    Older runs took the first MINUTES_*.pdf in a folder, which is usually the
+    previous meeting's. Returns True when it removed them.
+    """
+    url = (m.get("minutes") or {}).get("url")
+    if not url:
+        return False
+    when = parkboard_doc_date(url.rsplit("/", 1)[-1])
+    if when is None or when == m["date"].replace("-", ""):
+        return False
+    for name in ("minutes.pdf", "minutes.txt"):
+        (mdir / name).unlink(missing_ok=True)
+    m["minutes"] = None
+    m["status"] = "discovered"
+    log.warning("parkboard %s: dropped the minutes of %s (wrong meeting)",
+                key, when)
+    return True
+
+
+def parkboard_attach(fetcher, mdir: Path, key: str, m, url: str) -> None:
+    name = url.rsplit("/", 1)[-1]
+    dest = mdir / "attachments" / name
+    if download_file(fetcher, url, dest) is True:
+        extract_pdf_text(dest, dest.with_suffix(".txt"))
+        rel = f"meetings/{key}/attachments/{name}"
+        if not any(att["name"] == name for att in m["attachments"]):
+            m["attachments"].append({
+                "name": name,
+                "pdf": rel,
+                "txt": rel.rsplit(".", 1)[0] + ".txt",
+            })
 
 
 # --------------------------------------------------------------------------
@@ -1033,6 +1139,225 @@ def process_vsb(fetcher, body_dir, today, args):
 
 
 # --------------------------------------------------------------------------
+# Metro Vancouver Regional District Board
+# --------------------------------------------------------------------------
+
+def process_metro(fetcher, body_dir, today, args):
+    manifest = load_manifest(body_dir, "metro_vancouver_board")
+    counters = {"new_meetings": 0, "new_minutes": 0}
+    start, end = scrape_window(manifest, today, args.window_start)
+    log.info("metro: window %s..%s", start, end)
+
+    # Discovery: probe the agenda package of each weekday. The board meets on
+    # Fridays, special meetings on other days. Past dates that stayed empty
+    # for EMPTY_PROBE_FINAL_DAYS are not probed again.
+    date = start
+    while date <= end:
+        iso = date.isoformat()
+        key = f"{iso}_board"
+        seen = manifest["probed_empty"].get(iso)
+        final_empty = seen is not None and (
+            (today - date).days > EMPTY_PROBE_FINAL_DAYS
+        )
+        if date.weekday() < 5 and key not in manifest["meetings"] \
+                and not final_empty:
+            url = f"{METRO_BASE}/RD-{iso}-AGE.pdf"
+            if args.dry_run:
+                log.info("dry-run: metro probe %s", url)
+            else:
+                mdir = body_dir / "meetings" / key
+                if download_file(fetcher, url, mdir / "agenda.pdf") is True:
+                    manifest["probed_empty"].pop(iso, None)
+                    m = meeting_entry(manifest, key, iso, "board",
+                                      "MVRD Board", url, today, counters)
+                    extract_pdf_text(mdir / "agenda.pdf", mdir / "agenda.txt")
+                    m["agenda"] = {
+                        "url": url,
+                        "pdf": f"meetings/{key}/agenda.pdf",
+                        "txt": f"meetings/{key}/agenda.txt",
+                    }
+                else:
+                    manifest["probed_empty"][iso] = today.isoformat()
+        date += dt.timedelta(days=1)
+    if args.dry_run:
+        return counters
+    cutoff = (today - dt.timedelta(days=90)).isoformat()
+    manifest["probed_empty"] = {
+        d: seen for d, seen in manifest["probed_empty"].items() if d >= cutoff
+    }
+
+    # Minutes are posted once the board adopts them, at its next meeting.
+    for key in sorted(manifest["meetings"]):
+        m = manifest["meetings"][key]
+        if m["status"] in ("complete", "stale"):
+            continue
+        mdir = body_dir / "meetings" / key
+        url = f"{METRO_BASE}/RD-{m['date']}-MIN.pdf"
+        if not (mdir / "minutes.pdf").exists() and should_check_minutes(m, today):
+            if download_file(fetcher, url, mdir / "minutes.pdf") is True:
+                counters["new_minutes"] += 1
+        if (mdir / "minutes.pdf").exists():
+            quality = extract_pdf_text(mdir / "minutes.pdf",
+                                       mdir / "minutes.txt")
+            m["minutes"] = {
+                "url": url,
+                "published": True,
+                "pdf": f"meetings/{key}/minutes.pdf",
+                "txt": f"meetings/{key}/minutes.txt",
+                "text_quality": quality,
+            }
+        elif not m.get("minutes"):
+            m["minutes"] = {"url": url, "published": False}
+        update_status(m, mdir, today)
+
+    manifest["backfill_complete"] = True
+    save_manifest(body_dir, manifest)
+    return counters
+
+
+# --------------------------------------------------------------------------
+# TransLink Mayors' Council
+# --------------------------------------------------------------------------
+
+def month_number(name: str) -> int | None:
+    low = name.lower().rstrip(".")
+    return MONTHS.get(low) or MONTHS.get(low[:4]) or MONTHS.get(low[:3])
+
+
+def translink_minutes_sections(text: str):
+    """Yield (iso_date, text) for each set of draft minutes in an agenda
+    package. A set runs from its heading to the page that records the
+    adjournment."""
+    heads = [mm.start() for mm in TRANSLINK_MINUTES_HEAD_RE.finditer(text)]
+    for i, head in enumerate(heads):
+        stop = heads[i + 1] if i + 1 < len(heads) else len(text)
+        part = text[head:stop]
+        held = TRANSLINK_MINUTES_HELD_RE.search(part[:1500])
+        adjourned = TRANSLINK_ADJOURNED_RE.search(part)
+        if not held or not adjourned:
+            continue
+        month = month_number(held.group(1))
+        if month is None:
+            continue
+        try:
+            when = dt.date(int(held.group(3)), month, int(held.group(2)))
+        except ValueError:
+            continue
+        page_end = part.find("\f", adjourned.end())
+        yield when.isoformat(), part[: page_end if page_end != -1 else None]
+
+
+def process_translink(fetcher, body_dir, today, args):
+    manifest = load_manifest(body_dir, "translink_mayors_council")
+    counters = {"new_meetings": 0, "new_minutes": 0}
+    start, end = scrape_window(manifest, today, args.window_start)
+    log.info("translink: window %s..%s", start, end)
+
+    resp = fetcher.get(TRANSLINK_PAGE)
+    soup = BeautifulSoup(resp.text, "html.parser")
+    for tr in soup.find_all("tr"):
+        cells = tr.find_all("td")
+        if not cells:
+            continue
+        when_text = cells[0].get_text(" ", strip=True)
+        mm = TRANSLINK_DATE_RE.search(when_text)
+        if not mm or "cancelled" in when_text.lower():
+            continue
+        month = month_number(mm.group(1))
+        if month is None:
+            continue
+        try:
+            date = dt.date(int(mm.group(3)), month, int(mm.group(2)))
+        except ValueError:
+            continue
+        if not start <= date <= end:
+            continue
+        pdfs = [urljoin(TRANSLINK_PAGE, a["href"])
+                for a in tr.find_all("a", href=True)
+                if a["href"].lower().split("?")[0].endswith(".pdf")]
+        if not pdfs:
+            continue  # nothing posted yet
+        row_text = tr.get_text(" ", strip=True).lower()
+        label = ("Mayors' Council (Inaugural)" if "inaugural" in row_text
+                 else "Mayors' Council")
+        key = f"{date.isoformat()}_public"
+        if args.dry_run:
+            log.info("dry-run: translink %s %s", key, pdfs)
+            continue
+        m = meeting_entry(manifest, key, date.isoformat(), "public", label,
+                          TRANSLINK_PAGE, today, counters)
+        mdir = body_dir / "meetings" / key
+        agendas = [u for u in pdfs if "agenda" in u.lower()]
+        if agendas and not (mdir / "agenda.pdf").exists():
+            if download_file(fetcher, agendas[0], mdir / "agenda.pdf") is True:
+                extract_pdf_text(mdir / "agenda.pdf", mdir / "agenda.txt")
+        if (mdir / "agenda.txt").exists():
+            m["agenda"] = {
+                "url": agendas[0] if agendas else None,
+                "pdf": f"meetings/{key}/agenda.pdf",
+                "txt": f"meetings/{key}/agenda.txt",
+            }
+        for url in pdfs:
+            if url in agendas:
+                continue
+            name = url.split("?")[0].rsplit("/", 1)[-1]
+            dest = mdir / "attachments" / name
+            if download_file(fetcher, url, dest) is True:
+                extract_pdf_text(dest, dest.with_suffix(".txt"))
+                rel = f"meetings/{key}/attachments/{name}"
+                if not any(a["name"] == name for a in m["attachments"]):
+                    m["attachments"].append({
+                        "name": name, "pdf": rel,
+                        "txt": rel.rsplit(".", 1)[0] + ".txt",
+                    })
+    if args.dry_run:
+        return counters
+
+    # The draft minutes of a meeting are in a later meeting's agenda package.
+    for key in sorted(manifest["meetings"]):
+        source = manifest["meetings"][key]
+        agenda_txt = body_dir / "meetings" / key / "agenda.txt"
+        if not agenda_txt.exists():
+            continue
+        text = agenda_txt.read_text(encoding="utf-8")
+        for iso, minutes in translink_minutes_sections(text):
+            target_key = f"{iso}_public"
+            target = manifest["meetings"].get(target_key)
+            if target is None or target_key == key:
+                continue
+            tdir = body_dir / "meetings" / target_key
+            out = tdir / "minutes.txt"
+            if out.exists():
+                continue
+            tdir.mkdir(parents=True, exist_ok=True)
+            out.write_text(
+                f"Draft minutes of {iso}, as circulated in the agenda package "
+                f"of the {source['date']} meeting.\n\n{minutes}",
+                encoding="utf-8",
+            )
+            target["minutes"] = {
+                "url": (source.get("agenda") or {}).get("url"),
+                "published": True,
+                "pdf": None,
+                "txt": f"meetings/{target_key}/minutes.txt",
+                "text_quality": "ok",
+                "draft_from": key,
+            }
+            counters["new_minutes"] += 1
+            log.info("translink: draft minutes of %s found in %s", iso, key)
+
+    for key in sorted(manifest["meetings"]):
+        m = manifest["meetings"][key]
+        if not m.get("minutes"):
+            m["minutes"] = {"url": None, "published": False}
+        update_status(m, body_dir / "meetings" / key, today)
+
+    manifest["backfill_complete"] = True
+    save_manifest(body_dir, manifest)
+    return counters
+
+
+# --------------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------------
 
@@ -1040,6 +1365,8 @@ BODY_FUNCS = {
     "council": process_council,
     "parkboard": process_parkboard,
     "vsb": process_vsb,
+    "metro": process_metro,
+    "translink": process_translink,
 }
 
 
